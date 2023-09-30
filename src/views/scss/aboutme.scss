@@ -1,0 +1,139 @@
+.main__container__aboutme {
+    width: 100%;
+    min-height: calc(100vh - 5rem);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--secend-bg-color);
+    .image__container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem;
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        animation: zoomIn 2s ease forwards;
+      }
+      @keyframes zoomIn {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+    }
+    .context__container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem;
+      color: var(--text-color);
+      overflow: hidden;
+      .about {
+        font-size: 3.5rem;
+        animation: slideTop 1s ease forwards;
+        span {
+          color: var(--main-color);
+        }
+      }
+      @keyframes slideTop {
+        0% {
+          transform: translateY(-100px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      h3 {
+        font-size: 1.6rem;
+        animation: sildeLeft 1s ease forwards;
+      }
+      p {
+        font-size: 1.2rem;
+        text-align: center;
+        animation: sildeLeft 1s ease forwards;
+      }
+      @keyframes sildeLeft {
+        0% {
+          transform: translateX(150px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      .button__read {
+        display: flex;
+        padding: 1rem 2.8rem;
+        color: var(--secend-bg-color);
+        box-shadow: 0 0 1rem var(--main-color);
+        background: var(--main-color);
+        letter-spacing: 0.1rem;
+        font-weight: 600;
+        animation: slideBottom 1s ease forwards;
+        @keyframes slideBottom {
+          0% {
+            transform: translateY(100px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+      }
+      .button__read:hover {
+        box-shadow: none;
+      }
+    }
+  }
+  @media (min-width: 1300px) {
+    .main__container__aboutme {
+      flex-direction: row;
+      .image__container {
+        width: 35%;
+        justify-content: flex-end;
+      }
+      .context__container {
+        width: 65%;
+        align-items: flex-start;
+        .about {
+          font-size: 4.5rem;
+        }
+        h3 {
+          font-size: 2.6rem;
+        }
+        p {
+          font-size: 1.6rem;
+          margin: 1rem 0;
+          text-align: left;
+        }
+      }
+    }
+  }
+  .bounce-enter-active {
+    animation: bounce-in 0.5s;
+  }
+  .bounce-leave-active {
+    animation: bounce-in 0.5s reverse;
+  }
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
