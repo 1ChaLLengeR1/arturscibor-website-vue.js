@@ -28,7 +28,7 @@
 <script>
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { computed, reactive } from "vue";
+import { computed, reactive, watch } from "vue";
 import TitleHeader from "../components/SingleProject/TitleHeader.vue";
 import BasicInformation from "../components/SingleProject/BasicInformation.vue";
 import Description from "../components/SingleProject/Description.vue";
@@ -64,26 +64,23 @@ export default {
     //functions
     store.dispatch("admin/loadProject", router.params.id);
 
-    const loadProject = () => {
-      setTimeout(() => {
-        item_project.name_project = loadSingleProject.value.name_project;
-        item_project.description = loadSingleProject.value.description;
-        item_project.completion_data = loadSingleProject.value.completion_data;
-        item_project.project_number = loadSingleProject.value.project_number;
-        item_project.level_advanced = loadSingleProject.value.level_advanced;
-        item_project.technologies = loadSingleProject.value.technologies;
-        item_project.images_frontend = loadSingleProject.value.images_frontend;
-        item_project.images_backend = loadSingleProject.value.images_backend;
-        item_project.link_page = loadSingleProject.value.link_page;
-        item_project.download_project_path =
-          loadSingleProject.value.file_download.path;
-      }, 100);
-    };
-    loadProject();
-
     //computed
     const loadSingleProject = computed(() => {
       return store.getters["admin/loadProject"];
+    });
+
+    //wachers
+    watch(loadSingleProject, (newVal) => {
+      item_project.name_project = newVal.name_project;
+      item_project.description = newVal.description;
+      item_project.completion_data = newVal.completion_data;
+      item_project.project_number = newVal.project_number;
+      item_project.level_advanced = newVal.level_advanced;
+      item_project.technologies = newVal.technologies;
+      item_project.images_frontend = newVal.images_frontend;
+      item_project.images_backend = newVal.images_backend;
+      item_project.link_page = newVal.link_page;
+      item_project.download_project_path = newVal.file_download.path;
     });
 
     return { loadSingleProject, item_project, loadProject };
