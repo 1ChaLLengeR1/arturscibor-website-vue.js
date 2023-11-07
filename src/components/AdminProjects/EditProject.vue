@@ -124,7 +124,7 @@
       </div>
       <ul class="load_images">
         <h3>Zdjęcia Frontend</h3>
-        <li v-for="item in values_project.images_frontend">
+        <li v-for="item in values_project.images_frontend" :key="item.id">
           <span>{{ item.name }}</span>
           <a :href="item.link" alt="link do zdjęcia">Podgląd pliku!</a>
           <v-btn
@@ -143,7 +143,7 @@
           ></v-btn>
         </li>
         <h3>Zdjęcia Backend</h3>
-        <li v-for="item in values_project.images_backend">
+        <li v-for="item in values_project.images_backend" :key="item.id">
           <span>{{ item.name }}</span>
           <a :href="item.link" alt="link do zdjęcia">Podgląd pliku!</a>
           <v-btn
