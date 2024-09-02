@@ -20,3 +20,19 @@ Project contains information about me, because website is about me hehe :). Proj
 - link: https://arturscibor.pl/signin
 ### Login: Test
 ### Password: Test
+
+# Technologies:
+### Frontend:
+- Vue.js
+- Vuex
+- Vue Router
+- Vuetify
+- CSS/SCSS
+### Backend
+- FastAPI
+- SQLAlchemy
+- PostgreSql
+### DevOps
+- Nginx
+- My VPS for hosting -> hosting: ovh.pl
+- Linux
