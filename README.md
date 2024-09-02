@@ -1,6 +1,11 @@
-# Website Vue.js 3
-### Trzeci projekt: Strona portfolio moja
-<img align="left" alt="photo" src="https://server.arturscibor.pl/file/imagesproject/0.49689868733778075-firstPhoto-zdjecie1_projekt.png" /> 
+# EN
+# Project Portfolio - Nuxt
+### This project is ma third full-stack project in my performance. Main technologies: Vue.js and FastAPI
 
-- Link do strony: https://arturscibor.pl/
-- Więcej informacji znajduję się: https://arturscibor.pl/projects/project/0914754c-b46c-4a0c-8ec0-be43034bc93e
+### Project Diet
+<p align="center">
+   <img width="100%" align="left" alt="photo" src="https://github.com/1ChaLLengeR1/1ChaLLengeR1/blob/main/images/arturscibor.png" />
+</p>
+
+- link to the page: https://arturscibor.pl/
+- similar information: https://arturscibor.pl/projects/project/f0faa618-7e9a-446a-849f-374c976d9524
