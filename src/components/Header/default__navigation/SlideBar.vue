@@ -2,32 +2,34 @@
   <div class="sliderBar__default" :class="{'activePostion':position}">
     <router-link
       v-for="item in arrayLinks"
-      :key="item"
+      :key="item.link_name"
       :to="{ name: item.link_name }"
       @click="offSildeBar"
-      >{{ item.name }}</router-link
+      >{{ t(item.labelKey) }}</router-link
     >
-    <button v-if="activeButton" @click="logout">Wyloguj się!</button>
+    <button v-if="activeButton" @click="logout">{{ t("nav.logout") }}</button>
   </div>
 </template>
 
 <script>
 import {useStore} from 'vuex'
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 export default {
   props: ["arrayLinks", "position", "activeButton"],
   emits:['off-slidebar'],
   setup(_,context) {
     const store = useStore()
     const router = useRouter()
+    const { t } = useI18n()
     const offSildeBar = () =>{
         context.emit('off-slidebar', false)
-    } 
+    }
     const logout = () =>{
       store.commit('auth/logout');
       router.push({name:'signin'})
     }
-    return {offSildeBar, logout}
+    return {t, offSildeBar, logout}
   },
 };
 </script>

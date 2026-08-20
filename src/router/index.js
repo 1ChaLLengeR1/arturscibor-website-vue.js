@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 //DefaultPanel
 import Home from "../views/Home.vue";
+import Work from "../views/Work.vue";
 import Tools from "../views/Tools.vue";
 import Projects from "../views/Projects.vue";
 import Contact from "../views/Contact.vue";
@@ -30,6 +31,11 @@ const router = createRouter({
       name: "home",
       path: "/home",
       component: Home,
+    },
+    {
+      name: "work",
+      path: "/work",
+      component: Work,
     },
     {
       name: "tools",

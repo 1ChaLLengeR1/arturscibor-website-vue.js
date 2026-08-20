@@ -1,7 +1,7 @@
 <template>
   <div class="main__contact__container">
     <div class="box__contact">
-      <the-header title="Skontaktuj się ze Mną!"></the-header>
+      <Header title="Skontaktuj się ze Mną!"></Header>
       <form enctype="multipart/form-data">
         <div class="inputs">
           <v-text-field
@@ -48,7 +48,7 @@ import { reactive } from "vue";
 import Header from "../components/Contact/Header.vue";
 export default {
   components: {
-    "the-header": Header,
+    Header,
   },
   setup() {
     //values

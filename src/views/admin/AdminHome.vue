@@ -1,6 +1,6 @@
 <template>
   <div class="admin__home__container">
-    <about-me-form></about-me-form>
+    <AboutMeForm></AboutMeForm>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import AboutMeForm from "../../components/Home_Admin/AboutMeForm.vue";
 export default {
   components: {
-    "about-me-form": AboutMeForm,
+    AboutMeForm,
   },
 };
 </script>

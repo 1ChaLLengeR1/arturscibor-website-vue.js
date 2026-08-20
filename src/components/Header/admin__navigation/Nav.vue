@@ -1,56 +1,61 @@
 <template>
   <header>
     <Transition name="sildeBar">
-      <slide-bar
+      <SlideBar
         v-if="sildeBarDefoult.activeClass && sildeBarDefoult.name === 'default'"
         :arrayLinks="arrayDefoultLinks"
         :position="false"
         :activeButton="true"
         @off-slidebar="offSlidebarLinksDefoult"
-      ></slide-bar>
+      ></SlideBar>
     </Transition>
     <Transition name="sildeBar">
-      <slide-bar
+      <SlideBar
         v-if="sildeBarAdmin.activeClass && sildeBarAdmin.name === 'admin'"
         :arrayLinks="arrayAdminLinks"
         :position="true"
         :activeButton="true"
         @off-slidebar="offSlidebarLinksAdmin"
-      ></slide-bar>
+      ></SlideBar>
     </Transition>
     <div class="wraper__container">
-      <toggle-button
+      <ToggleButton
         v-if="activeToggleDefoult"
         @toggle-button="defoultNav"
         name="default"
         :reset="resetToggleDefoult"
-      ></toggle-button>
-      <h3>Panel Nawigacyjny</h3>
+      ></ToggleButton>
+      <h3>{{ t("nav.navigationPanel") }}</h3>
     </div>
     <div class="wraper__container">
-      <h3>Panel Administratora</h3>
-      <toggle-button
+      <h3>{{ t("nav.adminPanel") }}</h3>
+      <LanguageSwitcher></LanguageSwitcher>
+      <ToggleButton
         v-if="activeToggleAdmin"
         @toggle-button="adminNav"
         name="admin"
         :reset="resetToggleAdmin"
-      ></toggle-button>
+      ></ToggleButton>
     </div>
   </header>
 </template>
 
 <script>
 import { ref, reactive } from "vue";
+import { useI18n } from "vue-i18n";
 import ToggleButton from "../default__navigation/ToggleButton.vue";
 import SlideBar from "../default__navigation/SlideBar.vue";
+import LanguageSwitcher from "../../util/LanguageSwitcher.vue";
 import ArrayLinksDefoult from "../../JS/ArrayLinksDefoult";
-import ArrayLinksAdmin from "../../JS/ArrayLinksAdmin.js";
+import ArrayLinksAdmin from "../../JS/ArrayLinksAdmin";
 export default {
   components: {
-    "toggle-button": ToggleButton,
-    "slide-bar": SlideBar,
+    ToggleButton,
+    SlideBar,
+    LanguageSwitcher,
   },
   setup() {
+    const { t } = useI18n();
     const resetToggleDefoult = ref(null);
     const resetToggleAdmin = ref(null);
     const activeToggleDefoult = ref(true);
@@ -91,6 +96,7 @@ export default {
     };
 
     return {
+      t,
       resetToggleDefoult,
       resetToggleAdmin,
       arrayDefoultLinks,

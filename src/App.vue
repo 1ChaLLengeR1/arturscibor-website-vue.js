@@ -1,20 +1,20 @@
 <template>
   <div class="app__container">
     <Transition name="bounce">
-      <The-Notification
+      <Notification
         v-if="notificationBox.offNotification"
         :information="notificationBox.information"
         :activeClass="notificationBox.class"
-      ></The-Notification>
+      ></Notification>
     </Transition>
-    <Loading-Spinner v-if="loadingSpinner"></Loading-Spinner>
+    <LoadingSpinner v-if="loadingSpinner"></LoadingSpinner>
     <div class="main__container__app">
-      <The-Header v-if="navigationAdmin"></The-Header>
-      <Admin-Header v-else></Admin-Header>
+      <Header v-if="navigationAdmin"></Header>
+      <AdminHeader v-else></AdminHeader>
       <main>
         <router-view></router-view>
       </main>
-      <The-Footer></The-Footer>
+      <Footer></Footer>
     </div>
   </div>
 </template>
@@ -29,11 +29,11 @@ import LoadingSpinner from "./components/util/LoadingSpinner.vue";
 import Notification from "./components/util/Notification.vue";
 export default {
   components: {
-    "The-Header": Header,
-    "Admin-Header": AdminHeader,
-    "Loading-Spinner": LoadingSpinner,
-    "The-Notification": Notification,
-    "The-Footer": Footer,
+    Header,
+    AdminHeader,
+    LoadingSpinner,
+    Notification,
+    Footer,
   },
   setup() {
     const store = useStore();

@@ -16,5 +16,26 @@
   },
   "footer": {
     "copyright": "©Copyright {year} Artur Ścibor. Wszelakie prawa zastrzeżone."
+  },
+  "brand": {
+    "logo": "Portfolio."
+  },
+  "nav": {
+    "home": "Home",
+    "work": "Doświadczenie",
+    "tools": "Narzędzia",
+    "projects": "Projekty",
+    "contact": "Kontakt",
+    "signin": "Zaloguj się",
+    "logout": "Wyloguj się!",
+    "navigationPanel": "Panel Nawigacyjny",
+    "adminPanel": "Panel Administratora",
+    "adminHome": "AdminHome",
+    "adminTools": "AdminTools",
+    "adminProjects": "AdminProjects",
+    "adminContact": "AdminContact"
+  },
+  "work": {
+    "title": "Doświadczenie"
   }
 }

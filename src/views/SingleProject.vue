@@ -1,27 +1,27 @@
 <template>
   <div class="single-page__container">
-    <title-header :name_project="item_project.name_project"></title-header>
-    <basic-information
+    <TitleHeader :name_project="item_project.name_project"></TitleHeader>
+    <BasicInformation
       :date="item_project.completion_data"
       :numeric="item_project.project_number"
       :level="item_project.level_advanced"
-    ></basic-information>
-    <the-description :description="item_project.description"></the-description>
-    <the-technologies
+    ></BasicInformation>
+    <Description :description="item_project.description"></Description>
+    <Technologies
       :technologies="item_project.technologies"
-    ></the-technologies>
-    <the-images
+    ></Technologies>
+    <Images
       :images="item_project.images_frontend"
       title="Zdjęcia Frontend"
-    ></the-images>
-    <the-images
+    ></Images>
+    <Images
       :images="item_project.images_backend"
       title="Zdjęcia Backend"
-    ></the-images>
-    <the-links
+    ></Images>
+    <Links
       :link_page="item_project.link_page"
       :path="item_project.download_project_path"
-    ></the-links>
+    ></Links>
   </div>
 </template>
 
@@ -37,12 +37,12 @@ import Images from "../components/SingleProject/Images.vue";
 import Links from "../components/SingleProject/Links.vue";
 export default {
   components: {
-    "basic-information": BasicInformation,
-    "title-header": TitleHeader,
-    "the-description": Description,
-    "the-technologies": Technologies,
-    "the-images": Images,
-    "the-links": Links,
+    BasicInformation,
+    TitleHeader,
+    Description,
+    Technologies,
+    Images,
+    Links,
   },
   setup() {
     //values

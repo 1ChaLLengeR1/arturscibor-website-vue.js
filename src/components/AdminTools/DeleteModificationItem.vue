@@ -8,7 +8,7 @@
         label="Znajdz Narzędzie!"
         v-model="search"
       ></v-text-field>
-        <item-li
+        <Item
           v-for="item in loadTools"
           :key="item.id"
           :id="item.id"
@@ -18,7 +18,7 @@
           :numeric="item.numeric"
           :link="item.link"
           :link_image="item.link_image"
-        ></item-li>
+        ></Item>
       </ul>
     </form>
   </div>
@@ -30,7 +30,7 @@ import { useStore } from "vuex";
 import { computed, ref } from "vue";
 export default {
   components: {
-    "item-li": Item,
+    Item,
   },
   setup() {
     // values

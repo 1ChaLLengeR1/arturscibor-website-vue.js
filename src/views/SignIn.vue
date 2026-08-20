@@ -1,9 +1,9 @@
 <template>
-  <login-error
+  <LoginError
     v-if="closePopupValue"
     @close-popup="closePopup"
     :error="errorResponse"
-  ></login-error>
+  ></LoginError>
   <div class="signIn__container">
     <div class="box__signin">
       <v-container>
@@ -60,7 +60,7 @@ import { useRouter } from "vue-router";
 import LoginError from "../components/util/LoginError.vue";
 export default {
   components: {
-    "login-error": LoginError,
+    LoginError,
   },
   setup() {
     const login = ref("");
