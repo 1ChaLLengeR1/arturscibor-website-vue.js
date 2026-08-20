@@ -11,7 +11,7 @@ import Page404 from "../views/Page404.vue";
 import SingleProject from "../views/SingleProject.vue"
 
 //Vuex
-import store from "../storage/index.js";
+import store from "../storage";
 
 //Admin Panel
 import AdminHome from "../views/admin/AdminHome.vue";

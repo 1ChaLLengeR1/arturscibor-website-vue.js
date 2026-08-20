@@ -1,4 +1,4 @@
-import store from "../../storage/index.js";
+import store from "../../storage";
 import type { ApiResult, HttpMethod, WriteRequestOptions } from "./types";
 
 function buildUrl(path: string): string {

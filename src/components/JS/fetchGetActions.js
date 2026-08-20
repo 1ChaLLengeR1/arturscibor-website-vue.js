@@ -1,6 +1,6 @@
 import { fetchData } from "./fetch";
 import router from '../../router/index.js'
-import store from '../../storage/index.js'
+import store from '../../storage'
 
 export async function fetchGet(url){
     const method = "GET";
