@@ -1,6 +1,5 @@
 import { fetchData } from "./fetch";
-import router from '../../router/index.js'
-import store from '../../storage/index.js'
+import store from '../../storage'
 
 export async function fetchGet(url){
     const method = "GET";
@@ -11,11 +10,11 @@ export async function fetchGet(url){
     const response = await fetchData(url, method, headers, null, false);
     store.commit('util/loadingSpinner', false)
     if(response.error){
-        store.commit('util/informationObject', {
-            error: response.error,
-            information: 'Błąd serwera!'
+        store.commit('util/notificationBox', {
+            information: response.error,
+            class: false,
+            offNotification: true
         })
-        router.push({name:'not-found'})
         return false;
     }
     return response

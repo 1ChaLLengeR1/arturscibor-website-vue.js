@@ -1,4 +1,4 @@
-import store from '../../storage/index.js'
+import store from '../../storage'
 export function notification(response) {
     if (response.error || response.detail) {
       store.commit("util/notificationBox", {

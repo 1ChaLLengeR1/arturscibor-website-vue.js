@@ -4,10 +4,6 @@ export default [
         link_name: 'home'
     },
     {
-        name: 'O mnie',
-        link_name: 'aboutme'
-    },
-    {
         name: 'Narzędzia',
         link_name: 'tools'
     },

@@ -1,4 +1,4 @@
-import store from '../../storage/index.js'
+import store from '../../storage'
 
 
 export async function fetchData(url, method, headers, body, methodFetch) {

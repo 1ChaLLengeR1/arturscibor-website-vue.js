@@ -1,0 +1,20 @@
+{
+  "common": {
+    "loading": "Loading..."
+  },
+  "home": {
+    "greeting": "Hi, it's me",
+    "name": "Artur Ścibor",
+    "iAm": "I am a",
+    "roles": [
+      "Frontend Developer",
+      "Backend Developer",
+      "DevOps Developer",
+      "Software Engineer"
+    ],
+    "downloadCv": "Download CV"
+  },
+  "footer": {
+    "copyright": "©Copyright {year} Artur Ścibor. All rights reserved."
+  }
+}

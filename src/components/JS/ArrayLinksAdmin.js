@@ -4,10 +4,6 @@ export default [
         link_name: 'adminhome'
     },
     {
-        name: 'AdminAboutMe',
-        link_name: 'adminaboutme'
-    },
-    {
         name: 'AdminTools',
         link_name: 'admintools'
     },
