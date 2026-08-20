@@ -32,6 +32,13 @@ export type ApiResult<DATA, ADDITIONALS = null, ERR_ADDITIONALS = null> =
 
 export type QueryParams = Record<string, string | number | boolean | undefined | null>;
 
+/** `pl`/`en` zawsze wymagane, dodatkowe języki dozwolone (docs/7-i18n-section.md pkt. 4). */
+export interface MultiLangText {
+  pl: string;
+  en: string;
+  [languageCode: string]: string;
+}
+
 export interface BaseRequestOptions {
   jwt?: boolean;
   headers?: HeadersInit;
