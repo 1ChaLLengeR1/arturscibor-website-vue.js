@@ -54,7 +54,7 @@
 
 <script>
 import { ref, computed } from "vue";
-import { fetchData } from "../components/JS/fetch";
+import { login as apiLogin } from "../api/auth/post";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import LoginError from "../components/util/LoginError.vue";
@@ -74,33 +74,23 @@ export default {
     const store = useStore();
 
     const autoLogin = () => {
-      store.dispatch("auth/automaticallyLogin");
+      store.dispatch("auth/apiRefreshTokens");
     };
     autoLogin();
 
     const signIn = async () => {
-      const url = "";
-      const method = "POST";
-      const headers = {
-        "content-type": "application/json",
-      };
-      const body = {
-        login: login.value,
-        password: password.value,
-      };
-
       store.commit("util/loadingSpinner", true);
-      const response = await fetchData(url, method, headers, body, "body");
+      const result = await apiLogin({ login: login.value, password: password.value });
       store.commit("util/loadingSpinner", false);
 
-      if (response.error) {
-        errorResponse.value = response.error;
+      if (result.status === "ERROR") {
+        errorResponse.value = result.data.message;
         closePopupValue.value = true;
         return;
       }
 
       store.commit("util/navigationAdmin", false);
-      store.commit("auth/loadTokens", response);
+      store.commit("auth/loadTokens", result.data);
       router.push({ name: "adminhome" });
     };
 

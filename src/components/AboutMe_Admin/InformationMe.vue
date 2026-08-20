@@ -1,38 +1,62 @@
 <template>
   <div class="aboutme__infomration__container">
-    <form enctype="multipart/form-data" class="aboutme__information__box">
+    <form class="aboutme__information__box" @submit.prevent="save">
       <h3>Informacje</h3>
       <v-text-field
         bg-color="white"
-        label="nazwa"
-        v-model="item_values.name"
+        label="Imię i nazwisko"
+        v-model="form.name"
       ></v-text-field>
       <v-text-field
         bg-color="white"
-        label="praca"
-        v-model="item_values.job"
+        label="Stanowisko"
+        v-model="form.job_title"
       ></v-text-field>
       <v-textarea
         variant="filled"
-        label="informacja"
+        label="Opis"
         auto-grow
         bg-color="white"
-        v-model="item_values.information"
+        v-model="form.body_markdown"
       ></v-textarea>
+      <v-btn @click="save" color="blue"> Zaaktualizuj! </v-btn>
+
+      <h3>Zdjęcia</h3>
+      <ul class="show__files">
+        <li class="item" v-for="img in aboutMe?.images ?? []" :key="img.file_id">
+          <a :href="resolveFileUrl(img.url)" target="_blank" alt="zdjecie">Podgląd zdjęcia</a>
+          <v-btn color="black" @click="detachImage(img.file_id)">Usuń</v-btn>
+        </li>
+      </ul>
       <v-file-input
         bg-color="white"
         show-size
         counter
+        accept="image/*"
         label="Załaduj zdjęcie!"
         v-model="file"
       ></v-file-input>
-      <ul class="show__files">
+      <v-btn @click="uploadImage" :disabled="file.length !== 1" color="blue">
+        Dodaj zdjęcie
+      </v-btn>
+
+      <h3>CV</h3>
+      <ul class="show__files" v-if="cv?.url">
         <li class="item">
-          <span>Zdjęcie</span>
-          <a :href="item_values.link_image" alt="zdjecie">Podgląd zdjęcia</a>
+          <a :href="resolveFileUrl(cv.url)" target="_blank" alt="cv">Podgląd aktualnego CV</a>
         </li>
       </ul>
-      <v-btn @click="upload" color="blue"> Zaaktualizuj! </v-btn>
+      <v-file-input
+        bg-color="white"
+        show-size
+        counter
+        accept="application/pdf"
+        label="Załaduj CV!"
+        v-model="cvFile"
+      ></v-file-input>
+      <v-btn @click="uploadCvFile" :disabled="cvFile.length !== 1" color="blue">
+        Zaktualizuj CV!
+      </v-btn>
     </form>
   </div>
 </template>
@@ -40,70 +64,65 @@
 <script>
 import { ref, computed, watch, reactive } from "vue";
 import { useStore } from "vuex";
-import { fetchData } from "../JS/fetch";
-import { notification } from "../JS/Notification";
+import { resolveFileUrl } from "../../utils/url";
 export default {
   setup() {
     const store = useStore();
-    const item_values = reactive({
-      item_id: "",
+    const form = reactive({
       name: "",
-      job: "",
-      information: "",
-      link_image: "",
+      job_title: "",
+      body_markdown: "",
     });
     const file = ref([]);
+    const cvFile = ref([]);
 
-    const item = computed(() => {
-      return store.getters["admin/loadInformationAboutMe"];
-    });
+    store.dispatch("aboutme/apiGetAboutMe");
+    const aboutMe = computed(() => store.getters["aboutme/data"]);
+    const cv = computed(() => store.getters["cv/current"]);
 
-    watch(item, (newVal) => {
-      item_values.item_id = newVal.id;
-      item_values.name = newVal.name;
-      item_values.job = newVal.job;
-      item_values.information = newVal.information;
-      item_values.link_image = newVal.link_image;
-    });
+    watch(
+      aboutMe,
+      (newVal) => {
+        if (!newVal) return;
+        form.name = newVal.name ?? "";
+        form.job_title = newVal.job_title ?? "";
+        form.body_markdown = newVal.body_markdown ?? "";
+      },
+      { immediate: true }
+    );
 
-    const upload = async () => {
-      const formData = new FormData();
-      formData.append("item_id", item_values.item_id);
-      formData.append("name", item_values.name);
-      formData.append("job", item_values.job);
-      formData.append("information", item_values.information);
-      if (file.value.length === 1) {
-        for (const key of file.value) {
-          formData.append("file", key);
-        }
-      } else {
-        formData.append(
-          "file",
-          new File(["brak"], "brak.txt", {
-            type: "text/plain",
-          })
-        );
-      }
-
-      const url = "";
-      const method = "PUT";
-      const headers = {
-        Authorization: `Bearer ${store.getters["auth/optionsTokens"].access_token}`,
-      };
-
-      const response = await fetchData(
-        url,
-        method,
-        headers,
-        formData,
-        "formData"
-      );
-      notification(response);
-      file.value = [];
-      store.dispatch("admin/loadInformationAboutMe");
+    const save = () => {
+      store.dispatch("aboutme/apiUpdateAboutMe", { ...form });
     };
 
-    return { item, upload, item_values, file };
+    const uploadImage = () => {
+      if (file.value.length !== 1) return;
+      store.dispatch("aboutme/apiUploadAboutMeImage", file.value[0]);
+      file.value = [];
+    };
+
+    const detachImage = (fileId) => {
+      store.dispatch("aboutme/apiDetachAboutMeImage", fileId);
+    };
+
+    const uploadCvFile = () => {
+      if (cvFile.value.length !== 1) return;
+      store.dispatch("cv/apiUploadCv", cvFile.value[0]);
+      cvFile.value = [];
+    };
+
+    return {
+      form,
+      file,
+      cvFile,
+      aboutMe,
+      cv,
+      save,
+      uploadImage,
+      detachImage,
+      uploadCvFile,
+      resolveFileUrl,
+    };
   },
 };
 </script>
@@ -126,6 +145,7 @@ export default {
     .show__files {
       width: 100%;
       display: flex;
+      flex-direction: column;
       gap: 0.5rem;
       list-style: none;
 
@@ -153,7 +173,7 @@ export default {
       text-align: center;
     }
   }
- 
+
 }
 @media (min-width: 750px) {
   .aboutme__infomration__container {

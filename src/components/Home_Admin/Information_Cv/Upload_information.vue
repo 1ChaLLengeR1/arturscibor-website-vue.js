@@ -4,7 +4,7 @@
       <h3>Zmień swoj krótki opis</h3>
       <v-textarea
         label="Krótki opis siebie"
-        v-model="text.information"
+        v-model="text.body_markdown"
         bg-color="white"
       ></v-textarea>
       <v-btn @click="uploadInformation">Zapisz</v-btn>
@@ -14,44 +14,32 @@
 
 <script>
 import { reactive, computed, watch } from "vue";
-import { fetchData } from "../../JS/fetch";
-import { notification } from "../../JS/Notification";
 import { useStore } from "vuex";
 
 export default {
   setup() {
     const store = useStore();
     const text = reactive({
-      id: null,
-      information: null,
+      body_markdown: "",
     });
 
-    const informationMe = computed(() => {
-      return store.getters["admin/loadInformationMe"];
-    });
+    store.dispatch("aboutme/apiGetAboutMe");
+    const aboutMe = computed(() => store.getters["aboutme/data"]);
 
-    watch(informationMe, (newVal) => {
-      text.id = newVal.id;
-      text.information = newVal.information;
-    });
+    watch(
+      aboutMe,
+      (newVal) => {
+        if (!newVal) return;
+        text.body_markdown = newVal.body_markdown ?? "";
+      },
+      { immediate: true }
+    );
 
-    const uploadInformation = async () => {
-      const url = "";
-      const method = "PUT";
-      const headers = {
-        authorization: `Bearer ${store.getters["auth/optionsTokens"].access_token}`,
-        "Content-Type": "application/json",
-      };
-      const body = {
-        id: text.id,
-        information: text.information,
-      };
-      const response = await fetchData(url, method, headers, body, "body")
-      notification(response)
-      store.dispatch("admin/loadInformationHome");
+    const uploadInformation = () => {
+      store.dispatch("aboutme/apiUpdateAboutMe", { body_markdown: text.body_markdown });
     };
 
-    return { text, uploadInformation, informationMe };
+    return { text, uploadInformation, aboutMe };
   },
 };
 </script>

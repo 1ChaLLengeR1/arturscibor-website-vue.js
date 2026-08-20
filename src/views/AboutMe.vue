@@ -8,14 +8,14 @@
       ></read-more>
     </Transition>
     <div class="image__container">
-      <img :src="loadInformationAboutMe.link_image"/>
+      <img :src="resolveFileUrl(aboutMe?.images?.[0]?.url)" />
     </div>
     <div class="context__container">
-      <h2 class="about"><span>{{loadInformationAboutMe.name}}</span></h2>
-      <h3>{{loadInformationAboutMe.job}}</h3>
-      <p>
-       {{ loadInformationAboutMe.information }}
-      </p>
+      <h2 class="about">
+        <span>{{ aboutMe?.name }}</span>
+      </h2>
+      <h3>{{ aboutMe?.job_title }}</h3>
+      <markdown-renderer class="body-markdown" :source="aboutMe?.body_markdown"></markdown-renderer>
       <v-btn
         class="button__read"
         rounded
@@ -32,25 +32,24 @@
 
 <script>
 import ReadMore from "../components/AboutMe/ReadMoreAboutMe.vue";
+import MarkdownRenderer from "../components/util/MarkdownRenderer.vue";
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
+import { resolveFileUrl } from "../utils/url";
 export default {
   components: {
     "read-more": ReadMore,
+    "markdown-renderer": MarkdownRenderer,
   },
   setup() {
-    const store = useStore()
+    const store = useStore();
     const readMoreBackground = ref(false);
 
-    store.dispatch('admin/loadInformationAboutMe')
-    const loadInformationAboutMe = computed(()=>{
-      return store.getters['admin/loadInformationAboutMe']
-    })
+    store.dispatch("aboutme/apiGetAboutMe");
+    const aboutMe = computed(() => store.getters["aboutme/data"]);
 
-    store.dispatch('admin/loadReadMore')
-    const loadReadMore = computed(()=>{
-      return store.getters['admin/loadReadMore']
-    })
+    // "Przeczytaj więcej" nie ma dziś odpowiednika w API (docs/1.home-section.md) — pusta lista, żeby modal się nie wywalał.
+    const loadReadMore = computed(() => []);
 
     const readMore = () => {
       readMoreBackground.value = true;
@@ -60,7 +59,14 @@ export default {
       readMoreBackground.value = val;
     };
 
-    return { readMoreBackground, readMore, closeReadMore, loadInformationAboutMe, loadReadMore };
+    return {
+      readMoreBackground,
+      readMore,
+      closeReadMore,
+      aboutMe,
+      loadReadMore,
+      resolveFileUrl,
+    };
   },
 };
 </script>

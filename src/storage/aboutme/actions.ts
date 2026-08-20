@@ -5,6 +5,7 @@ import type {
   AboutMeImageAttachPayload,
   AboutMeUpdatePayload,
 } from "../../api/aboutme/types";
+import { confirmFile, initFile, uploadFileBytes } from "../../api/common/file/post";
 import { notifyError, notifySuccess } from "../common/notify";
 import type { RootState } from "../common/types";
 import type { AboutMeState } from "./state";
@@ -19,34 +20,71 @@ const actions: ActionTree<AboutMeState, RootState> = {
     commit("setAboutMe", result.data);
   },
 
-  async apiUpdateAboutMe({ commit, dispatch }, payload: AboutMeUpdatePayload) {
+  async apiUpdateAboutMe({ commit }, payload: AboutMeUpdatePayload) {
     const result = await updateAboutMe(payload);
     if (result.status === "ERROR") {
       notifyError(commit, result.data.message);
       return;
     }
     notifySuccess(commit, "Zapisano zmiany.");
-    await dispatch("apiGetAboutMe");
+    commit("setAboutMe", result.data);
   },
 
-  async apiAttachAboutMeImage({ commit, dispatch }, payload: AboutMeImageAttachPayload) {
+  async apiAttachAboutMeImage({ commit }, payload: AboutMeImageAttachPayload) {
     const result = await attachAboutMeImage(payload);
     if (result.status === "ERROR") {
       notifyError(commit, result.data.message);
       return;
     }
     notifySuccess(commit, "Dodano zdjęcie.");
-    await dispatch("apiGetAboutMe");
+    commit("setAboutMe", result.data);
   },
 
-  async apiDetachAboutMeImage({ commit, dispatch }, fileId: string) {
+  async apiDetachAboutMeImage({ commit }, fileId: string) {
     const result = await detachAboutMeImage(fileId);
     if (result.status === "ERROR") {
       notifyError(commit, result.data.message);
       return;
     }
     notifySuccess(commit, "Usunięto zdjęcie.");
-    await dispatch("apiGetAboutMe");
+    commit("setAboutMe", result.data);
+  },
+
+  /** Pełny handshake: init pliku -> wgranie bajtów -> potwierdzenie -> dopięcie do AboutMe. */
+  async apiUploadAboutMeImage({ commit }, file: File) {
+    const initResult = await initFile({
+      original_name: file.name,
+      size: file.size,
+      directory: "aboutme",
+      file_type: "photo",
+      mime_type: file.type || null,
+    });
+    if (initResult.status === "ERROR" || !initResult.data) {
+      notifyError(commit, initResult.status === "ERROR" ? initResult.data.message : "Nie udało się zainicjować uploadu.");
+      return;
+    }
+
+    const fileId = initResult.data.file_id;
+    const uploadResult = await uploadFileBytes(fileId, file);
+    if (uploadResult.status === "ERROR") {
+      notifyError(commit, uploadResult.data.message);
+      return;
+    }
+
+    const confirmResult = await confirmFile(fileId);
+    if (confirmResult.status === "ERROR") {
+      notifyError(commit, confirmResult.data.message);
+      return;
+    }
+
+    const attachResult = await attachAboutMeImage({ file_id: fileId });
+    if (attachResult.status === "ERROR") {
+      notifyError(commit, attachResult.data.message);
+      return;
+    }
+
+    notifySuccess(commit, "Dodano zdjęcie.");
+    commit("setAboutMe", attachResult.data);
   },
 };
 

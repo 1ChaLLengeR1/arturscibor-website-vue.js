@@ -1,6 +1,7 @@
 import type { ApiResult } from "../types";
 
-export type FileType = "photo" | "video";
+/** `docs/rest_api_docs.json` jest tu przestarzały — backend ma też "document" (PDF, CV). */
+export type FileType = "photo" | "video" | "document";
 
 export type FileDirectory = "aboutme" | "cv" | "projects" | "tools" | "work";
 

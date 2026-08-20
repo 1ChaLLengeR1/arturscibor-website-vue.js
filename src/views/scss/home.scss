@@ -37,33 +37,31 @@
       font-size: 1.2rem;
       overflow: hidden;
 
-      .text{
+      .text {
         position: relative;
         color: var(--main-color);
         span:before {
-            content: "";
-            position: absolute;
-            z-index: 10;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-color);
-            border-left: 2px solid var(--main-color);
-            animation: animate 4s steps(22) infinite;
-            @keyframes animate {
-              40%,
-              60% {
-                left: 100%;
-              }
-              100% {
-                left: 0;
-              }
+          content: "";
+          position: absolute;
+          z-index: 10;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: var(--bg-color);
+          border-left: 2px solid var(--main-color);
+          animation: animate 4s steps(22) infinite;
+          @keyframes animate {
+            40%,
+            60% {
+              left: 100%;
             }
-          
+            100% {
+              left: 0;
+            }
+          }
         }
       }
-     
     }
 
     h1 {
@@ -83,9 +81,9 @@
       }
     }
 
-    p {
+    .body-markdown {
+      width: 100%;
       font-size: 1.3rem;
-      text-align: center;
       padding: 0.5rem;
       animation: slideRight 1s ease forwards;
       @keyframes slideRight {
@@ -104,7 +102,7 @@
       display: flex;
       padding: 1rem 2.8rem;
       color: var(--secend-bg-color);
-      box-shadow: 0 0 .5rem var(--main-color);
+      box-shadow: 0 0 0.5rem var(--main-color);
       background: var(--main-color);
       letter-spacing: 0.1rem;
       font-weight: 600;
@@ -123,7 +121,7 @@
     .button__cv:hover {
       box-shadow: none;
     }
-   
+
     @media (min-width: 1000px) {
       h3 {
         font-size: 3.2rem;
@@ -131,21 +129,19 @@
       h1 {
         font-size: 5.6rem;
       }
-      p{
+      .body-markdown {
         font-size: 1.6rem;
-        text-align: left;
       }
-      .text__typing{
+      .text__typing {
         font-size: 2.8rem;
       }
     }
 
     @media (min-width: 1530px) {
-      .text__typing{
+      .text__typing {
         font-size: 3.5rem;
       }
     }
-   
   }
 
   .image__container {
@@ -171,9 +167,9 @@
       }
     }
   }
-  @media(min-width: 750px){
-    .image__container{
-      img{
+  @media (min-width: 750px) {
+    .image__container {
+      img {
         max-width: 40rem;
         max-height: 40rem;
       }
@@ -186,7 +182,7 @@
       padding-left: 4.5rem;
       align-items: flex-start;
     }
-    .image__container{
+    .image__container {
       width: 50%;
     }
   }
