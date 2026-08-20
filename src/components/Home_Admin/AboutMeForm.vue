@@ -2,19 +2,35 @@
   <div class="aboutme__infomration__container">
     <form class="aboutme__information__box" @submit.prevent="save">
       <h3>Informacje</h3>
+      <div class="language__switch">
+        <v-btn
+          :color="language === 'pl' ? 'blue' : undefined"
+          @click="switchLanguage('pl')"
+        >
+          PL
+        </v-btn>
+        <v-btn
+          :color="language === 'en' ? 'blue' : undefined"
+          @click="switchLanguage('en')"
+        >
+          EN
+        </v-btn>
+      </div>
       <v-text-field
         bg-color="white"
         label="Imię i nazwisko"
+        hint="Pole nie jest tłumaczone — wspólne dla obu języków"
+        persistent-hint
         v-model="form.name"
       ></v-text-field>
       <v-text-field
         bg-color="white"
-        label="Stanowisko"
+        :label="`Stanowisko (${language.toUpperCase()})`"
         v-model="form.job_title"
       ></v-text-field>
       <v-textarea
         variant="filled"
-        label="Opis"
+        :label="`Opis (${language.toUpperCase()})`"
         auto-grow
         bg-color="white"
         v-model="form.body_markdown"
@@ -68,6 +84,7 @@ import { resolveFileUrl } from "../../utils/url";
 export default {
   setup() {
     const store = useStore();
+    const language = ref("pl");
     const form = reactive({
       name: "",
       job_title: "",
@@ -76,7 +93,11 @@ export default {
     const file = ref([]);
     const cvFile = ref([]);
 
-    store.dispatch("aboutme/apiGetAboutMe");
+    const loadAboutMe = () => {
+      store.dispatch("aboutme/apiGetAboutMe", language.value);
+    };
+    loadAboutMe();
+
     const aboutMe = computed(() => store.getters["aboutme/data"]);
     const cv = computed(() => store.getters["cv/current"]);
 
@@ -91,8 +112,13 @@ export default {
       { immediate: true }
     );
 
+    const switchLanguage = (lang) => {
+      language.value = lang;
+      loadAboutMe();
+    };
+
     const save = () => {
-      store.dispatch("aboutme/apiUpdateAboutMe", { ...form });
+      store.dispatch("aboutme/apiUpdateAboutMe", { ...form, language_code: language.value });
     };
 
     const uploadImage = () => {
@@ -112,11 +138,13 @@ export default {
     };
 
     return {
+      language,
       form,
       file,
       cvFile,
       aboutMe,
       cv,
+      switchLanguage,
       save,
       uploadImage,
       detachImage,
@@ -141,6 +169,12 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+
+    .language__switch {
+      width: 100%;
+      display: flex;
+      gap: 0.5rem;
+    }
 
     .show__files {
       width: 100%;

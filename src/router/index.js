@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from "vue-router";
 
 //DefaultPanel
 import Home from "../views/Home.vue";
-import AboutMe from "../views/AboutMe.vue";
 import Tools from "../views/Tools.vue";
 import Projects from "../views/Projects.vue";
 import Contact from "../views/Contact.vue";
@@ -15,7 +14,6 @@ import store from "../storage";
 
 //Admin Panel
 import AdminHome from "../views/admin/AdminHome.vue";
-import AdminAboutMe from "../views/admin/AdminAboutMe.vue";
 import AdminTools from "../views/admin/AdminTools.vue";
 import AdminProjects from "../views/admin/AdminProjects.vue";
 import AdminContact from '../views/admin/AdminContact.vue'
@@ -32,11 +30,6 @@ const router = createRouter({
       name: "home",
       path: "/home",
       component: Home,
-    },
-    {
-      name: "aboutme",
-      path: "/aboutme",
-      component: AboutMe,
     },
     {
       name: "tools",
@@ -67,12 +60,6 @@ const router = createRouter({
       name: "adminhome",
       path: "/admin_home",
       component: AdminHome,
-      meta: { auth: true },
-    },
-    {
-      name: "adminaboutme",
-      path: "/admin_aboutme",
-      component: AdminAboutMe,
       meta: { auth: true },
     },
     {
