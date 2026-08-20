@@ -1,23 +1,23 @@
 <template>
   <div class="main__container__home">
-    <section class="context_container">
+    <div class="grid-greeting">
       <Greeting />
-      <MarkdownRenderer class="body-markdown" :source="informationMe"></MarkdownRenderer>
-      <SocialMedia></SocialMedia>
-      <v-btn
-        class="button__cv"
-        rounded
-        width="15rem"
-        height="3rem"
-        size="x-large"
-        @click="downloadCv"
-      >
-        {{ t("home.downloadCv") }}
-      </v-btn>
-    </section>
-    <section class="image__container">
+    </div>
+    <div class="grid-carousel">
       <Carousel :images="imagesMe"></Carousel>
-    </section>
+    </div>
+    <MarkdownRenderer class="grid-markdown body-markdown" :source="informationMe"></MarkdownRenderer>
+    <SocialMedia class="grid-social"></SocialMedia>
+    <v-btn
+      class="grid-cv button__cv"
+      rounded
+      width="15rem"
+      height="3rem"
+      size="x-large"
+      @click="downloadCv"
+    >
+      {{ t("home.downloadCv") }}
+    </v-btn>
   </div>
 </template>
 

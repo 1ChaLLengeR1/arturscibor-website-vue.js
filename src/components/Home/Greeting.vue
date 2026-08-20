@@ -7,7 +7,7 @@
         <span>{{ t("home.iAm") }}</span>
       </div>
       <div class="text">
-        <span>{{ role }}</span>
+        <span :key="role" :style="{ '--char-count': role.length || 1 }">{{ role }}</span>
       </div>
     </div>
   </div>
@@ -98,7 +98,7 @@ export default {
         height: 100%;
         background-color: var(--bg-color);
         border-left: 2px solid var(--main-color);
-        animation: animate 4s steps(22) infinite;
+        animation: animate 4s steps(var(--char-count, 22)) infinite;
         @keyframes animate {
           40%,
           60% {

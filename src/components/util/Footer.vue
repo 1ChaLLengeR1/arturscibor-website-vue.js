@@ -1,11 +1,19 @@
 <template>
   <footer class="footer__container">
-    <p>&copyCopyright 2023 Artur Ścibor. Wszelakie prawa zastrzeżone.</p>
+    <p>{{ t("footer.copyright", { year }) }}</p>
   </footer>
 </template>
 
 <script>
-export default {};
+import { useI18n } from "vue-i18n";
+export default {
+  setup() {
+    const { t } = useI18n();
+    const year = new Date().getFullYear();
+
+    return { t, year };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
