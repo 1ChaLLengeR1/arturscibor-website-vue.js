@@ -37,7 +37,6 @@
     "adminWork": "AdminWork"
   },
   "tools": {
-    "intro": "To są narzędzia, z których korzystam w trakcie budowania strony",
     "progressLabel": "Poziom umiejętności",
     "moreLink": "Więcej na oficjalnej stronie",
     "showMore": "Pokaż więcej",
@@ -51,7 +50,6 @@
     }
   },
   "work": {
-    "title": "Doświadczenie",
     "present": "obecnie",
     "showMore": "więcej",
     "showLess": "mniej",

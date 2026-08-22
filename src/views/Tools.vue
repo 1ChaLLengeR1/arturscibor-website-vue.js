@@ -1,9 +1,5 @@
 <template>
   <div class="container__main__tools">
-    <div class="title__container">
-      <p>{{ t("tools.intro") }}</p>
-      <hr />
-    </div>
     <ul class="tools__items">
       <li class="item" v-for="item in sortedTools" :key="item.id">
         <img
@@ -120,38 +116,6 @@ export default {
   gap: 1rem;
   background: var(--bg-color);
 
-  .title__container {
-    width: 100%;
-    min-height: 5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    animation: slideHeader 1s ease forwards;
-    @keyframes slideHeader {
-      0% {
-        transform: translateY(-100px);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-    p {
-      font-size: 25px;
-      font-weight: bold;
-      text-align: center;
-      color: var(--main-color);
-    }
-    hr {
-      width: 95%;
-      height: 1px;
-      background-color: var(--main-color);
-    }
-  }
   .tools__items {
     width: 100%;
     display: flex;
@@ -322,11 +286,6 @@ export default {
 
 @media (min-width: 750px) {
   .container__main__tools {
-    .title__container {
-      p {
-        font-size: 35px;
-      }
-    }
     .tools__items {
       width: 80%;
       .item {

@@ -1,6 +1,5 @@
 <template>
   <div class="container__main__work">
-    <h2>{{ t("work.title") }}</h2>
     <div class="companies">
       <CompanySection v-for="company in sortedCompanies" :key="company.id" :company="company"></CompanySection>
     </div>
@@ -24,7 +23,7 @@ export default {
   },
   setup() {
     const store = useStore();
-    const { t, locale } = useI18n();
+    const { locale } = useI18n();
 
     store.dispatch("work/apiGetWorkCollection", locale.value);
     const collection = computed(() => store.getters["work/collection"]);
@@ -32,7 +31,7 @@ export default {
       [...collection.value].sort((a, b) => mostRecentStart(b).localeCompare(mostRecentStart(a)))
     );
 
-    return { t, sortedCompanies };
+    return { sortedCompanies };
   },
 };
 </script>
@@ -48,14 +47,21 @@ export default {
   background: var(--bg-color);
   color: var(--text-color);
 
-  h2 {
-    color: var(--main-color);
-  }
-
   .companies {
     width: 100%;
     display: flex;
     flex-direction: column;
+    animation: slideCompanies 1s ease forwards;
+    @keyframes slideCompanies {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
   }
 }
 @media (min-width: 750px) {
