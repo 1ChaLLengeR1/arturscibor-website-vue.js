@@ -12,7 +12,7 @@
       </div>
       <div class="icons">
         <v-btn color="blue" @click="showEditTool(tool.id)">{{ t("admin.tools.edit") }}</v-btn>
-        <v-btn color="black" @click="deleteTool(tool.id)">{{ t("admin.tools.delete") }}</v-btn>
+        <v-btn color="black" @click="deleteTool(tool)">{{ t("admin.tools.delete") }}</v-btn>
       </div>
     </li>
   </ul>
@@ -23,6 +23,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { resolveFileUrl } from "../../utils/url";
+import { requestConfirm } from "../../utils/confirm";
 
 export default {
   emits: ["show-edit-tool"],
@@ -36,8 +37,11 @@ export default {
       emit("show-edit-tool", { show: true, toolId });
     };
 
-    const deleteTool = (toolId) => {
-      store.dispatch("tools/apiDeleteTool", toolId);
+    const deleteTool = (tool) => {
+      requestConfirm(store, {
+        message: t("admin.tools.confirmDeleteTool", { name: tool.name }),
+        onConfirm: () => store.dispatch("tools/apiDeleteTool", tool.id),
+      });
     };
 
     return { t, collection, showEditTool, deleteTool, resolveFileUrl };

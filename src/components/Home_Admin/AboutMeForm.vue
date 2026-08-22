@@ -73,6 +73,7 @@ import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { resolveFileUrl } from "../../utils/url";
 import UploadFile from "../util/UploadFile.vue";
+import { requestConfirm } from "../../utils/confirm";
 export default {
   components: {
     UploadFile,
@@ -120,7 +121,10 @@ export default {
     };
 
     const detachImage = (fileId) => {
-      store.dispatch("aboutme/apiDetachAboutMeImage", fileId);
+      requestConfirm(store, {
+        message: t("admin.aboutme.confirmDeletePhoto"),
+        onConfirm: () => store.dispatch("aboutme/apiDetachAboutMeImage", fileId),
+      });
     };
 
     const uploadCvFile = (file) => {

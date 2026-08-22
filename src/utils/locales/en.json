@@ -1,6 +1,8 @@
 {
   "common": {
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "cancel": "Cancel",
+    "confirmDeleteButton": "Delete"
   },
   "home": {
     "greeting": "Hi, it's me",
@@ -49,6 +51,15 @@
       "expert": "Expert"
     }
   },
+  "contact": {
+    "title": "Get in touch!",
+    "name": "Full name",
+    "email": "E-mail",
+    "subject": "Subject",
+    "phone": "Phone",
+    "description": "Message",
+    "send": "Send message"
+  },
   "work": {
     "present": "present",
     "showMore": "more",
@@ -79,7 +90,8 @@
       "cvTitle": "CV",
       "cvPreview": "Preview current CV",
       "uploadCv": "Upload CV!",
-      "updateCv": "Update CV!"
+      "updateCv": "Update CV!",
+      "confirmDeletePhoto": "Are you sure you want to delete this photo?"
     },
     "work": {
       "addCompanyTitle": "Add company",
@@ -113,7 +125,10 @@
       "locationPl": "Location (PL)",
       "locationEn": "Location (EN)",
       "descriptionPl": "Description (PL)",
-      "descriptionEn": "Description (EN)"
+      "descriptionEn": "Description (EN)",
+      "confirmDeleteCompany": "Are you sure you want to delete the company \"{name}\" along with all its positions?",
+      "confirmRemoveLogo": "Are you sure you want to remove this company's logo?",
+      "confirmDeleteItem": "Are you sure you want to delete the position \"{name}\"?"
     },
     "tools": {
       "addToolTitle": "Add tool",
@@ -137,7 +152,27 @@
       "uploadImage": "Upload image!",
       "updateImage": "Update image",
       "scaleTitle": "Skill level scale",
-      "currentLevel": "Current level:"
+      "currentLevel": "Current level:",
+      "confirmDeleteTool": "Are you sure you want to delete the tool \"{name}\"?",
+      "confirmRemoveImage": "Are you sure you want to remove this tool's image?"
+    },
+    "contact": {
+      "title": "Messages",
+      "empty": "No messages",
+      "view": "View",
+      "delete": "Delete",
+      "read": "Read",
+      "unread": "Unread",
+      "detailTitle": "Message details",
+      "name": "Full name",
+      "email": "E-mail",
+      "phone": "Phone",
+      "subject": "Subject",
+      "description": "Message",
+      "sentAt": "Sent",
+      "close": "Close",
+      "noSubject": "(no subject)",
+      "confirmDelete": "Are you sure you want to delete the message from \"{name}\"?"
     }
   }
 }
