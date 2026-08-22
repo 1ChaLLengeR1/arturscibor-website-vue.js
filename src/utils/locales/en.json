@@ -36,8 +36,20 @@
     "adminContact": "AdminContact",
     "adminWork": "AdminWork"
   },
+  "tools": {
+    "progressLabel": "Skill level",
+    "moreLink": "More on the official website",
+    "showMore": "Show more",
+    "close": "Close",
+    "skillLevel": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "veryGood": "Very good",
+      "expert": "Expert"
+    }
+  },
   "work": {
-    "title": "Experience",
     "present": "present",
     "showMore": "more",
     "showLess": "less",
@@ -102,6 +114,30 @@
       "locationEn": "Location (EN)",
       "descriptionPl": "Description (PL)",
       "descriptionEn": "Description (EN)"
+    },
+    "tools": {
+      "addToolTitle": "Add tool",
+      "namePl": "Name (PL)",
+      "nameEn": "Name (EN)",
+      "informationPl": "Description (PL)",
+      "informationEn": "Description (EN)",
+      "progress": "Skill level (0-100)",
+      "displayOrder": "Display order",
+      "optional": "Optional",
+      "link": "Link",
+      "addTool": "Add tool",
+      "edit": "Edit",
+      "delete": "Delete",
+      "toolTitle": "Tool",
+      "name": "Name ({lang})",
+      "information": "Description ({lang})",
+      "saveChanges": "Save changes",
+      "imageTitle": "Image",
+      "removeImage": "Remove image",
+      "uploadImage": "Upload image!",
+      "updateImage": "Update image",
+      "scaleTitle": "Skill level scale",
+      "currentLevel": "Current level:"
     }
   }
 }
