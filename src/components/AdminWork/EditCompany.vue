@@ -89,7 +89,7 @@
           ></v-text-field>
           <div class="item__actions">
             <v-btn color="blue" @click="updateItem(item)">{{ t("admin.work.saveItem") }}</v-btn>
-            <v-btn color="black" @click="deleteItem(item.id)">{{ t("admin.work.deleteItem") }}</v-btn>
+            <v-btn color="black" @click="deleteItem(item)">{{ t("admin.work.deleteItem") }}</v-btn>
           </div>
         </li>
       </ul>
@@ -172,6 +172,7 @@ import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { resolveFileUrl } from "../../utils/url";
 import UploadFile from "../util/UploadFile.vue";
+import { requestConfirm } from "../../utils/confirm";
 
 const EMPLOYMENT_TYPE_VALUES = ["full_time", "part_time", "contract", "b2b", "internship", "volunteer"];
 
@@ -284,7 +285,10 @@ export default {
     };
 
     const removeLogo = () => {
-      store.dispatch("work/apiRemoveWorkLogo", props.id);
+      requestConfirm(store, {
+        message: t("admin.work.confirmRemoveLogo"),
+        onConfirm: () => store.dispatch("work/apiRemoveWorkLogo", props.id),
+      });
     };
 
     const updateItem = (item) => {
@@ -304,8 +308,12 @@ export default {
       });
     };
 
-    const deleteItem = (itemId) => {
-      store.dispatch("work/apiDeleteWorkItem", { workId: props.id, itemId });
+    const deleteItem = (item) => {
+      requestConfirm(store, {
+        message: t("admin.work.confirmDeleteItem", { name: item.title }),
+        onConfirm: () =>
+          store.dispatch("work/apiDeleteWorkItem", { workId: props.id, itemId: item.id }),
+      });
     };
 
     const addItem = () => {

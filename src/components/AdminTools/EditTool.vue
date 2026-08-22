@@ -70,6 +70,7 @@ import { useI18n } from "vue-i18n";
 import { resolveFileUrl } from "../../utils/url";
 import UploadFile from "../util/UploadFile.vue";
 import SkillLevelHint from "./SkillLevelHint.vue";
+import { requestConfirm } from "../../utils/confirm";
 
 export default {
   components: {
@@ -145,9 +146,13 @@ export default {
 
     const removeImage = () => {
       if (!currentImage.value) return;
-      store.dispatch("tools/apiDetachToolImage", {
-        toolId: props.id,
-        fileId: currentImage.value.file_id,
+      requestConfirm(store, {
+        message: t("admin.tools.confirmRemoveImage"),
+        onConfirm: () =>
+          store.dispatch("tools/apiDetachToolImage", {
+            toolId: props.id,
+            fileId: currentImage.value.file_id,
+          }),
       });
     };
 

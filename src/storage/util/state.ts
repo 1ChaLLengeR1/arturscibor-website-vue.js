@@ -9,11 +9,18 @@ export interface NotificationBox {
   offNotification: boolean;
 }
 
+export interface ConfirmDialogState {
+  message: string;
+  confirmLabel: string | null;
+  onConfirm: () => void;
+}
+
 export interface UtilState {
   loadingSpinner: boolean;
   navigationAdmin: boolean;
   informationObject: InformationObject | null;
   notificationBox: NotificationBox;
+  confirmDialog: ConfirmDialogState | null;
 }
 
 export function state(): UtilState {
@@ -26,5 +33,6 @@ export function state(): UtilState {
       class: null,
       offNotification: false,
     },
+    confirmDialog: null,
   };
 }

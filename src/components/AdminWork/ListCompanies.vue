@@ -13,7 +13,7 @@
       </div>
       <div class="icons">
         <v-btn color="blue" @click="showEditCompany(company.id)">{{ t("admin.work.edit") }}</v-btn>
-        <v-btn color="black" @click="deleteCompany(company.id)">{{ t("admin.work.delete") }}</v-btn>
+        <v-btn color="black" @click="deleteCompany(company)">{{ t("admin.work.delete") }}</v-btn>
       </div>
     </li>
   </ul>
@@ -24,6 +24,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { resolveFileUrl } from "../../utils/url";
+import { requestConfirm } from "../../utils/confirm";
 
 export default {
   emits: ["show-edit-company"],
@@ -37,8 +38,11 @@ export default {
       emit("show-edit-company", { show: true, workId });
     };
 
-    const deleteCompany = (workId) => {
-      store.dispatch("work/apiDeleteWork", workId);
+    const deleteCompany = (company) => {
+      requestConfirm(store, {
+        message: t("admin.work.confirmDeleteCompany", { name: company.company_name }),
+        onConfirm: () => store.dispatch("work/apiDeleteWork", company.id),
+      });
     };
 
     return { t, collection, showEditCompany, deleteCompany, resolveFileUrl };

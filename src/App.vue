@@ -8,6 +8,7 @@
       ></Notification>
     </Transition>
     <LoadingSpinner v-if="loadingSpinner"></LoadingSpinner>
+    <ConfirmDialog></ConfirmDialog>
     <div class="main__container__app">
       <Header v-if="navigationAdmin"></Header>
       <AdminHeader v-else></AdminHeader>
@@ -27,12 +28,14 @@ import Footer from "./components/util/Footer.vue";
 import AdminHeader from "./components/Header/admin__navigation/Nav.vue";
 import LoadingSpinner from "./components/util/LoadingSpinner.vue";
 import Notification from "./components/util/Notification.vue";
+import ConfirmDialog from "./components/util/ConfirmDialog.vue";
 export default {
   components: {
     Header,
     AdminHeader,
     LoadingSpinner,
     Notification,
+    ConfirmDialog,
     Footer,
   },
   setup() {

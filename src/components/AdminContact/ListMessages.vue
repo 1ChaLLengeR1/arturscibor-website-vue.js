@@ -11,7 +11,7 @@
       </div>
       <div class="icons">
         <v-btn color="blue" @click="$emit('view-message', message)">{{ t("admin.contact.view") }}</v-btn>
-        <v-btn color="black" @click="deleteMessage(message.id)">{{ t("admin.contact.delete") }}</v-btn>
+        <v-btn color="black" @click="deleteMessage(message)">{{ t("admin.contact.delete") }}</v-btn>
       </div>
     </li>
   </ul>
@@ -21,6 +21,7 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
+import { requestConfirm } from "../../utils/confirm";
 
 export default {
   emits: ["view-message"],
@@ -30,8 +31,11 @@ export default {
 
     const collection = computed(() => store.getters["contact/collection"]);
 
-    const deleteMessage = (contactId) => {
-      store.dispatch("contact/apiDeleteContact", contactId);
+    const deleteMessage = (message) => {
+      requestConfirm(store, {
+        message: t("admin.contact.confirmDelete", { name: message.name }),
+        onConfirm: () => store.dispatch("contact/apiDeleteContact", message.id),
+      });
     };
 
     return { t, collection, deleteMessage };

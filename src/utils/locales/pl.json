@@ -1,6 +1,8 @@
 {
   "common": {
-    "loading": "Ładowanie..."
+    "loading": "Ładowanie...",
+    "cancel": "Anuluj",
+    "confirmDeleteButton": "Usuń"
   },
   "home": {
     "greeting": "Cześć, to Ja",
@@ -88,7 +90,8 @@
       "cvTitle": "CV",
       "cvPreview": "Podgląd aktualnego CV",
       "uploadCv": "Załaduj CV!",
-      "updateCv": "Zaktualizuj CV!"
+      "updateCv": "Zaktualizuj CV!",
+      "confirmDeletePhoto": "Czy na pewno chcesz usunąć to zdjęcie?"
     },
     "work": {
       "addCompanyTitle": "Dodaj firmę",
@@ -122,7 +125,10 @@
       "locationPl": "Lokalizacja (PL)",
       "locationEn": "Lokalizacja (EN)",
       "descriptionPl": "Opis (PL)",
-      "descriptionEn": "Opis (EN)"
+      "descriptionEn": "Opis (EN)",
+      "confirmDeleteCompany": "Czy na pewno chcesz usunąć firmę „{name}” wraz ze wszystkimi jej stanowiskami?",
+      "confirmRemoveLogo": "Czy na pewno chcesz usunąć logo tej firmy?",
+      "confirmDeleteItem": "Czy na pewno chcesz usunąć stanowisko „{name}”?"
     },
     "tools": {
       "addToolTitle": "Dodaj narzędzie",
@@ -146,7 +152,9 @@
       "uploadImage": "Załaduj obrazek!",
       "updateImage": "Zaktualizuj obrazek",
       "scaleTitle": "Skala poziomu umiejętności",
-      "currentLevel": "Aktualny poziom:"
+      "currentLevel": "Aktualny poziom:",
+      "confirmDeleteTool": "Czy na pewno chcesz usunąć narzędzie „{name}”?",
+      "confirmRemoveImage": "Czy na pewno chcesz usunąć obrazek tego narzędzia?"
     },
     "contact": {
       "title": "Wiadomości",
@@ -163,7 +171,8 @@
       "description": "Wiadomość",
       "sentAt": "Wysłano",
       "close": "Zamknij",
-      "noSubject": "(bez tematu)"
+      "noSubject": "(bez tematu)",
+      "confirmDelete": "Czy na pewno chcesz usunąć wiadomość od „{name}”?"
     }
   }
 }

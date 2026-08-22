@@ -1,8 +1,11 @@
 import type { GetterTree } from "vuex";
 import type { RootState } from "../common/types";
-import type { InformationObject, NotificationBox, UtilState } from "./state";
+import type { ConfirmDialogState, InformationObject, NotificationBox, UtilState } from "./state";
 
 const getters: GetterTree<UtilState, RootState> = {
+  confirmDialog(state): ConfirmDialogState | null {
+    return state.confirmDialog;
+  },
   loadingSpinner(state): boolean {
     return state.loadingSpinner;
   },

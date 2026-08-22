@@ -1,7 +1,10 @@
 import type { MutationTree } from "vuex";
-import type { InformationObject, NotificationBox, UtilState } from "./state";
+import type { ConfirmDialogState, InformationObject, NotificationBox, UtilState } from "./state";
 
 const mutations: MutationTree<UtilState> = {
+  confirmDialog(state, payload: ConfirmDialogState | null) {
+    state.confirmDialog = payload;
+  },
   loadingSpinner(state, payload: boolean) {
     state.loadingSpinner = payload;
   },
