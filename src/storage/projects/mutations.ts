@@ -9,6 +9,9 @@ const mutations: MutationTree<ProjectsState> = {
   setProject(state, payload: ProjectResponseData | null) {
     state.project = payload;
   },
+  setLang(state, payload: string | null) {
+    state.lang = payload;
+  },
 };
 
 export default mutations;

@@ -1,89 +1,71 @@
 <template>
   <div class="single-page__container">
-    <TitleHeader :name_project="item_project.name_project"></TitleHeader>
-    <BasicInformation
-      :date="item_project.completion_data"
-      :numeric="item_project.project_number"
-      :level="item_project.level_advanced"
-    ></BasicInformation>
-    <Description :description="item_project.description"></Description>
-    <Technologies
-      :technologies="item_project.technologies"
-    ></Technologies>
-    <Images
-      :images="item_project.images_frontend"
-      title="Zdjęcia Frontend"
-    ></Images>
-    <Images
-      :images="item_project.images_backend"
-      title="Zdjęcia Backend"
-    ></Images>
-    <Links
-      :link_page="item_project.link_page"
-      :path="item_project.download_project_path"
-    ></Links>
+    <router-link class="back__link" :to="{ name: 'projects' }">{{ t("projects.backLink") }}</router-link>
+
+    <template v-if="project">
+      <v-carousel v-if="project.images.length" show-arrows="hover" hide-controls class="gallery">
+        <v-carousel-item
+          v-for="image in project.images"
+          :key="image.file_id"
+          :src="resolveFileUrl(image.url)"
+        ></v-carousel-item>
+      </v-carousel>
+
+      <h1>{{ project.name }}</h1>
+      <p v-if="project.level" class="level">{{ t(`projects.level.${project.level}`) }}</p>
+      <p v-if="project.completed_at" class="completed">
+        {{ t("projects.completedAt") }}: {{ formatDate(project.completed_at) }}
+      </p>
+
+      <div v-if="project.technologies?.length" class="technologies">
+        <v-chip v-for="tech in project.technologies" :key="tech" size="small">{{ tech }}</v-chip>
+      </div>
+
+      <MarkdownRenderer v-if="project.description" :source="project.description"></MarkdownRenderer>
+
+      <div class="links">
+        <a v-if="project.github_url" :href="project.github_url" target="_blank" rel="noopener">
+          {{ t("projects.github") }}
+        </a>
+        <a v-if="project.live_url" :href="project.live_url" target="_blank" rel="noopener">
+          {{ t("projects.live") }}
+        </a>
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
+import { computed, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { computed, reactive, watch } from "vue";
-import TitleHeader from "../components/SingleProject/TitleHeader.vue";
-import BasicInformation from "../components/SingleProject/BasicInformation.vue";
-import Description from "../components/SingleProject/Description.vue";
-import Technologies from "../components/SingleProject/Technologies.vue";
-import Images from "../components/SingleProject/Images.vue";
-import Links from "../components/SingleProject/Links.vue";
+import { useI18n } from "vue-i18n";
+import MarkdownRenderer from "../components/util/MarkdownRenderer.vue";
+import { resolveFileUrl } from "../utils/url";
+
 export default {
   components: {
-    BasicInformation,
-    TitleHeader,
-    Description,
-    Technologies,
-    Images,
-    Links,
+    MarkdownRenderer,
   },
   setup() {
-    //values
+    const route = useRoute();
     const store = useStore();
-    const router = useRoute();
-    const item_project = reactive({
-      name_project: "",
-      description: "",
-      completion_data: "",
-      project_number: "",
-      level_advanced: "",
-      technologies: [],
-      images_frontend: [],
-      images_backend: [],
-      link_page: "",
-      download_project_path: "",
-    });
+    const { t, locale } = useI18n();
 
-    //functions
-    store.dispatch("admin/loadProject", router.params.id);
+    const loadProject = () => {
+      store.dispatch("projects/apiGetProject", { projectId: route.params.id, lang: locale.value });
+    };
+    loadProject();
 
-    //computed
-    const loadSingleProject = computed(() => {
-      return store.getters["admin/loadProject"];
-    });
+    watch(locale, loadProject);
+    watch(() => route.params.id, loadProject);
 
-    //wachers
-    watch(loadSingleProject, (newVal) => {
-      item_project.name_project = newVal.name_project;
-      item_project.description = newVal.description;
-      item_project.completion_data = newVal.completion_data;
-      item_project.project_number = newVal.project_number;
-      item_project.level_advanced = newVal.level_advanced;
-      item_project.technologies = newVal.technologies;
-      item_project.images_frontend = newVal.images_frontend;
-      item_project.images_backend = newVal.images_backend;
-      item_project.link_page = newVal.link_page;
-      item_project.download_project_path = newVal.file_download.path;
-    });
+    const project = computed(() => store.getters["projects/project"]);
 
-    return { loadSingleProject, item_project, loadProject };
+    const formatDate = (dateStr) =>
+      new Intl.DateTimeFormat(locale.value, { dateStyle: "long" }).format(new Date(dateStr));
+
+    return { t, project, formatDate, resolveFileUrl };
   },
 };
 </script>
@@ -95,7 +77,66 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  padding: 0.5rem;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-color);
+  color: var(--text-color);
+
+  .back__link {
+    align-self: flex-start;
+    color: var(--main-color);
+  }
+
+  .gallery {
+    width: 100%;
+    max-width: 40rem;
+    border-radius: 8px;
+  }
+
+  h1 {
+    color: var(--main-color);
+    text-align: center;
+  }
+
+  .level,
+  .completed {
+    opacity: 0.7;
+  }
+
+  .technologies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem;
+  }
+
+  .links {
+    width: 100%;
+    max-width: 30rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    a {
+      display: block;
+      padding: 0.6rem;
+      text-align: center;
+      color: var(--secend-bg-color);
+      background: var(--main-color);
+      border-radius: 8px;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+    a:hover {
+      box-shadow: none;
+    }
+  }
+}
+@media (min-width: 750px) {
+  .single-page__container {
+    :deep(.markdown-renderer) {
+      width: 60%;
+    }
+  }
 }
 </style>
