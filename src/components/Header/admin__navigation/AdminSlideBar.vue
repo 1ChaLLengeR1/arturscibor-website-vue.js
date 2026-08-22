@@ -57,9 +57,11 @@ export default {
     const { t } = useI18n();
     const activeTab = ref("admin");
 
-    const currentLinks = computed(
-      () => TABS.find((tab) => tab.key === activeTab.value)?.links ?? []
-    );
+    const currentLinks = computed(() => {
+      const links = TABS.find((tab) => tab.key === activeTab.value)?.links ?? [];
+      // Jesteśmy w panelu admina, więc na pewno zalogowani - link "Zaloguj się" jest tu bez sensu.
+      return links.filter((link) => link.link_name !== "signin");
+    });
 
     const close = () => emit("close");
 

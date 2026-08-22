@@ -2,24 +2,24 @@ import type { NavLink } from "./ArrayLinksDefoult";
 
 const links: NavLink[] = [
   {
-    labelKey: "nav.adminHome",
+    labelKey: "nav.home",
     link_name: "adminhome",
   },
   {
-    labelKey: "nav.adminTools",
+    labelKey: "nav.work",
+    link_name: "adminwork",
+  },
+  {
+    labelKey: "nav.tools",
     link_name: "admintools",
   },
   {
-    labelKey: "nav.adminProjects",
+    labelKey: "nav.projects",
     link_name: "adminprojects",
   },
   {
-    labelKey: "nav.adminContact",
+    labelKey: "nav.contact",
     link_name: "admincontact",
-  },
-  {
-    labelKey: "nav.adminWork",
-    link_name: "adminwork",
   },
 ];
 

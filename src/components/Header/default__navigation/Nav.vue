@@ -57,7 +57,7 @@ export default {
     const resetToggle = ref(null)
 
     const checkSreenWidth = () => {
-      if (window.innerWidth >= 1200) {
+      if (window.innerWidth >= 1600) {
         mobile.value = true;
         sildeBar.activeClass = false;
       } else {

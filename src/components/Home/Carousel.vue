@@ -1,5 +1,5 @@
 <template>
-  <img :key="cycle" :src="current" alt="My Image" />
+  <img :key="cycle" :class="{ 'fade-cycle': images.length > 1 }" :src="current" alt="My Image" />
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
     let timer = null;
 
     const tick = () => {
-      if (props.images.length === 0) {
+      if (props.images.length <= 1) {
         return;
       }
       index.value = (index.value + 1) % props.images.length;
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style scoped>
-img {
+.fade-cycle {
   animation: carousel-fade 3s ease-in-out forwards;
 }
 

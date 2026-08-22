@@ -22,6 +22,16 @@
   "brand": {
     "logo": "Portfolio."
   },
+  "signin": {
+    "title": "This panel is for the site administrator only!",
+    "titleShort": "Admin panel!",
+    "login": "Login",
+    "password": "Password",
+    "testModeTitle": "Test mode — check it out!",
+    "testLogin": "Login:",
+    "testPassword": "Password:",
+    "submit": "Sign in"
+  },
   "nav": {
     "home": "Home",
     "work": "Experience",
@@ -31,12 +41,7 @@
     "signin": "Sign in",
     "logout": "Log out!",
     "navigationPanel": "Navigation Panel",
-    "adminPanel": "Admin Panel",
-    "adminHome": "AdminHome",
-    "adminTools": "AdminTools",
-    "adminProjects": "AdminProjects",
-    "adminContact": "AdminContact",
-    "adminWork": "AdminWork"
+    "adminPanel": "Admin Panel"
   },
   "tools": {
     "progressLabel": "Skill level",
