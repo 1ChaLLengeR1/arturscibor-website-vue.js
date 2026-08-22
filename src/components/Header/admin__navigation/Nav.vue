@@ -1,115 +1,41 @@
 <template>
   <header>
     <Transition name="sildeBar">
-      <SlideBar
-        v-if="sildeBarDefoult.activeClass && sildeBarDefoult.name === 'default'"
-        :arrayLinks="arrayDefoultLinks"
-        :position="false"
-        :activeButton="true"
-        @off-slidebar="offSlidebarLinksDefoult"
-      ></SlideBar>
+      <AdminSlideBar v-if="menuOpen" @close="closeMenu"></AdminSlideBar>
     </Transition>
-    <Transition name="sildeBar">
-      <SlideBar
-        v-if="sildeBarAdmin.activeClass && sildeBarAdmin.name === 'admin'"
-        :arrayLinks="arrayAdminLinks"
-        :position="true"
-        :activeButton="true"
-        @off-slidebar="offSlidebarLinksAdmin"
-      ></SlideBar>
-    </Transition>
-    <div class="wraper__container">
-      <ToggleButton
-        v-if="activeToggleDefoult"
-        @toggle-button="defoultNav"
-        name="default"
-        :reset="resetToggleDefoult"
-      ></ToggleButton>
-      <h3>{{ t("nav.navigationPanel") }}</h3>
-    </div>
-    <div class="wraper__container">
-      <h3>{{ t("nav.adminPanel") }}</h3>
-      <LanguageSwitcher></LanguageSwitcher>
-      <ToggleButton
-        v-if="activeToggleAdmin"
-        @toggle-button="adminNav"
-        name="admin"
-        :reset="resetToggleAdmin"
-      ></ToggleButton>
-    </div>
+    <h3>{{ t("nav.adminPanel") }}</h3>
+    <ToggleButton name="admin" :reset="resetToggle" @toggle-button="onToggle"></ToggleButton>
   </header>
 </template>
 
 <script>
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 import { useI18n } from "vue-i18n";
-import ToggleButton from "../default__navigation/ToggleButton.vue";
-import SlideBar from "../default__navigation/SlideBar.vue";
-import LanguageSwitcher from "../../util/LanguageSwitcher.vue";
-import ArrayLinksDefoult from "../../JS/ArrayLinksDefoult";
-import ArrayLinksAdmin from "../../JS/ArrayLinksAdmin";
+import ToggleButton from "../ToggleButton.vue";
+import AdminSlideBar from "./AdminSlideBar.vue";
+
 export default {
   components: {
     ToggleButton,
-    SlideBar,
-    LanguageSwitcher,
+    AdminSlideBar,
   },
   setup() {
     const { t } = useI18n();
-    const resetToggleDefoult = ref(null);
-    const resetToggleAdmin = ref(null);
-    const activeToggleDefoult = ref(true);
-    const activeToggleAdmin = ref(true);
-    const sildeBarDefoult = reactive({
-      activeClass: true,
-      name: null,
-    });
-    const sildeBarAdmin = reactive({
-      activeClass: true,
-      name: null,
-    });
-    const arrayDefoultLinks = ref(ArrayLinksDefoult);
-    const arrayAdminLinks = ref(ArrayLinksAdmin);
+    const menuOpen = ref(false);
+    const resetToggle = ref(null);
 
-    const defoultNav = (val) => {
-      activeToggleAdmin.value = !val.activeClass;
-      sildeBarDefoult.activeClass = val.activeClass;
-      sildeBarDefoult.name = val.name;
-      resetToggleDefoult.value = val.resetToggleDefoult;
+    const onToggle = (val) => {
+      menuOpen.value = val.activeClass;
+      resetToggle.value = null;
     };
 
-    const adminNav = (val) => {
-      activeToggleDefoult.value = !val.activeClass;
-      sildeBarAdmin.activeClass = val.activeClass;
-      sildeBarAdmin.name = val.name;
-      resetToggleAdmin.value = val.resetToggleAdmin;
+    const closeMenu = () => {
+      if (!menuOpen.value) return;
+      menuOpen.value = false;
+      resetToggle.value = true;
     };
 
-    const offSlidebarLinksDefoult = (val) => {
-      sildeBarDefoult.activeClass = val;
-      resetToggleDefoult.value = !val;
-    };
-
-    const offSlidebarLinksAdmin = (val) => {
-      sildeBarDefoult.activeClass = val;
-      resetToggleAdmin.value = !val;
-    };
-
-    return {
-      t,
-      resetToggleDefoult,
-      resetToggleAdmin,
-      arrayDefoultLinks,
-      arrayAdminLinks,
-      sildeBarDefoult,
-      sildeBarAdmin,
-      activeToggleDefoult,
-      activeToggleAdmin,
-      defoultNav,
-      adminNav,
-      offSlidebarLinksDefoult,
-      offSlidebarLinksAdmin,
-    };
+    return { t, menuOpen, resetToggle, onToggle, closeMenu };
   },
 };
 </script>
@@ -124,28 +50,19 @@ header {
   align-items: center;
   padding: 0.5rem;
   background: var(--bg-color);
-  
-  .wraper__container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
 
-    h3 {
-      color: white;
-      font-size: 0.75rem;
-    }
+  h3 {
+    color: white;
+    font-size: 0.75rem;
   }
 
-  @media (min-width: 750px){
-    .wraper__container{
-      h3{
-        font-size: 1.2rem;
-      }
+  @media (min-width: 750px) {
+    h3 {
+      font-size: 1.2rem;
     }
-   
   }
 }
+
 .sildeBar-enter-from,
 .sildeBar-leave-to {
   opacity: 0;

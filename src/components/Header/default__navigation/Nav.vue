@@ -33,7 +33,7 @@
 
 <script>
 import Logo from "./Logo.vue";
-import ToggleButton from "./ToggleButton.vue";
+import ToggleButton from "../ToggleButton.vue";
 import SlideBarDefault from "./SlideBar.vue";
 import LanguageSwitcher from "../../util/LanguageSwitcher.vue";
 import ArrayDefoultLinks from "../../JS/ArrayLinksDefoult";
