@@ -1,7 +1,11 @@
 <template>
   <div class="add__company__container">
+    <CollapsiblePanel
+      :model-value="expanded"
+      @update:model-value="$emit('update:expanded', $event)"
+      :title="t('admin.work.addCompanyTitle')"
+    >
     <form class="add__company__box" @submit.prevent="addCompany">
-      <h3>{{ t("admin.work.addCompanyTitle") }}</h3>
       <v-text-field
         bg-color="white"
         :label="t('admin.work.companyName')"
@@ -19,16 +23,29 @@
         {{ t("admin.work.addCompany") }}
       </v-btn>
     </form>
+    </CollapsiblePanel>
   </div>
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
+import CollapsiblePanel from "../util/CollapsiblePanel.vue";
 
 export default {
-  setup() {
+  components: {
+    CollapsiblePanel,
+  },
+  props: {
+    expanded: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  emits: ["update:expanded"],
+  setup(props) {
+    const { expanded } = toRefs(props);
     const store = useStore();
     const { t } = useI18n();
     const form = reactive({
@@ -46,7 +63,7 @@ export default {
       form.numeric = null;
     };
 
-    return { t, form, addCompany };
+    return { t, expanded, form, addCompany };
   },
 };
 </script>
@@ -60,18 +77,15 @@ export default {
   align-items: center;
   padding: 0.5rem;
 
+  :deep(.collapsible__panel) {
+    width: 100%;
+  }
+
   .add__company__box {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-
-    h3 {
-      width: 100%;
-      font-size: 2rem;
-      color: white;
-      text-align: center;
-    }
 
     button {
       width: 100%;
@@ -80,11 +94,8 @@ export default {
 }
 @media (min-width: 750px) {
   .add__company__container {
-    .add__company__box {
+    :deep(.collapsible__panel) {
       width: 70%;
-      h3 {
-        text-align: left;
-      }
     }
   }
 }

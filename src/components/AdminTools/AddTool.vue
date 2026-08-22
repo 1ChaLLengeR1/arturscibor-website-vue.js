@@ -1,7 +1,11 @@
 <template>
   <div class="add__tool__container">
+    <CollapsiblePanel
+      :model-value="expanded"
+      @update:model-value="$emit('update:expanded', $event)"
+      :title="t('admin.tools.addToolTitle')"
+    >
     <form class="add__tool__box" @submit.prevent="addTool">
-      <h3>{{ t("admin.tools.addToolTitle") }}</h3>
       <v-text-field
         bg-color="white"
         :label="t('admin.tools.namePl')"
@@ -52,14 +56,16 @@
         {{ t("admin.tools.addTool") }}
       </v-btn>
     </form>
+    </CollapsiblePanel>
   </div>
 </template>
 
 <script>
-import { computed, reactive } from "vue";
+import { computed, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import SkillLevelHint from "./SkillLevelHint.vue";
+import CollapsiblePanel from "../util/CollapsiblePanel.vue";
 
 const toMultiLang = (pl, en) => {
   const plVal = (pl ?? "").trim();
@@ -71,8 +77,17 @@ const toMultiLang = (pl, en) => {
 export default {
   components: {
     SkillLevelHint,
+    CollapsiblePanel,
   },
-  setup() {
+  props: {
+    expanded: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  emits: ["update:expanded"],
+  setup(props) {
+    const { expanded } = toRefs(props);
     const store = useStore();
     const { t } = useI18n();
     const form = reactive({
@@ -109,7 +124,7 @@ export default {
       form.link = "";
     };
 
-    return { t, form, canAdd, progressNumber, addTool };
+    return { t, expanded, form, canAdd, progressNumber, addTool };
   },
 };
 </script>
@@ -123,18 +138,15 @@ export default {
   align-items: center;
   padding: 0.5rem;
 
+  :deep(.collapsible__panel) {
+    width: 100%;
+  }
+
   .add__tool__box {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-
-    h3 {
-      width: 100%;
-      font-size: 2rem;
-      color: white;
-      text-align: center;
-    }
 
     button {
       width: 100%;
@@ -143,11 +155,8 @@ export default {
 }
 @media (min-width: 750px) {
   .add__tool__container {
-    .add__tool__box {
+    :deep(.collapsible__panel) {
       width: 70%;
-      h3 {
-        text-align: left;
-      }
     }
   }
 }

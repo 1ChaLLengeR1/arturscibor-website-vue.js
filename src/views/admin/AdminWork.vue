@@ -24,7 +24,7 @@
       :language="language"
       @close-edit-company="closeEditCompany"
     ></EditCompany>
-    <AddCompany></AddCompany>
+    <AddCompany v-model:expanded="addExpanded"></AddCompany>
     <ListCompanies @show-edit-company="showEditCompany"></ListCompanies>
   </div>
 </template>
@@ -46,6 +46,7 @@ export default {
     const store = useStore();
     const language = ref("pl");
     const editPanelRef = ref(null);
+    const addExpanded = ref(false);
     const edit_panel = reactive({
       show: false,
       workId: null,
@@ -64,6 +65,7 @@ export default {
     const showEditCompany = (val) => {
       edit_panel.show = val.show;
       edit_panel.workId = val.workId;
+      addExpanded.value = false;
       nextTick(() => {
         editPanelRef.value?.$el?.scrollIntoView({ behavior: "smooth", block: "start" });
       });
@@ -76,6 +78,7 @@ export default {
     return {
       language,
       editPanelRef,
+      addExpanded,
       edit_panel,
       switchLanguage,
       showEditCompany,

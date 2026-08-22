@@ -24,7 +24,7 @@
       :language="language"
       @close-edit-tool="closeEditTool"
     ></EditTool>
-    <AddTool></AddTool>
+    <AddTool v-model:expanded="addExpanded"></AddTool>
     <ListTools @show-edit-tool="showEditTool"></ListTools>
   </div>
 </template>
@@ -46,6 +46,7 @@ export default {
     const store = useStore();
     const language = ref("pl");
     const editPanelRef = ref(null);
+    const addExpanded = ref(false);
     const edit_panel = reactive({
       show: false,
       toolId: null,
@@ -64,6 +65,7 @@ export default {
     const showEditTool = (val) => {
       edit_panel.show = val.show;
       edit_panel.toolId = val.toolId;
+      addExpanded.value = false;
       nextTick(() => {
         editPanelRef.value?.$el?.scrollIntoView({ behavior: "smooth", block: "start" });
       });
@@ -76,6 +78,7 @@ export default {
     return {
       language,
       editPanelRef,
+      addExpanded,
       edit_panel,
       switchLanguage,
       showEditTool,
