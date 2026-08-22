@@ -1,40 +1,45 @@
 <template>
   <div class="main__contact__container">
     <div class="box__contact">
-      <Header title="Skontaktuj się ze Mną!"></Header>
-      <form enctype="multipart/form-data">
+      <Header :title="t('contact.title')"></Header>
+      <form @submit.prevent="sendMessage">
         <div class="inputs">
           <v-text-field
             color="white"
             bg-color="#323946"
-            v-model="item_message.name"
-            label="Imię i Nazwisko"
+            v-model="form.name"
+            :label="t('contact.name')"
           ></v-text-field>
           <v-text-field
             color="white"
             bg-color="#323946"
-            v-model="item_message.email"
-            label="E-mail"
+            v-model="form.email"
+            :label="t('contact.email')"
+          ></v-text-field>
+        </div>
+        <div class="inputs">
+          <v-text-field
+            color="white"
+            bg-color="#323946"
+            v-model="form.subject"
+            :label="t('contact.subject')"
+          ></v-text-field>
+          <v-text-field
+            color="white"
+            bg-color="#323946"
+            v-model="form.phone"
+            :label="t('contact.phone')"
           ></v-text-field>
         </div>
         <v-textarea
           rows="15"
           color="white"
           bg-color="#323946"
-          v-model="item_message.description"
-          label="Opis wiadomości"
+          v-model="form.description"
+          :label="t('contact.description')"
         ></v-textarea>
-        <p>Dołącz zdjęcia strony, którą chcesz wycenić</p>
-        <v-file-input
-          multiple
-          color="white"
-          bg-color="#323946"
-          v-model="item_message.images"
-          show-size
-          label="Załaduj zdjęcia"
-        ></v-file-input>
         <div class="button">
-          <button @click.prevent="sendMessage">Wyślij wiadomość</button>
+          <button type="submit" :disabled="!canSend">{{ t("contact.send") }}</button>
         </div>
       </form>
     </div>
@@ -42,56 +47,48 @@
 </template>
 
 <script>
-import { fetchData } from "../components/JS/fetch.js";
-import { notification } from "../components/JS/Notification.js";
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
+import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 import Header from "../components/Contact/Header.vue";
+
 export default {
   components: {
     Header,
   },
   setup() {
-    //values
-    const item_message = reactive({
+    const store = useStore();
+    const { t } = useI18n();
+    const form = reactive({
       name: "",
       email: "",
+      subject: "",
+      phone: "",
       description: "",
-      images: [],
     });
 
-    const sendMessage = async () => {
-      const formData = new FormData();
-      formData.append("name", item_message.name);
-      formData.append("email", item_message.email);
-      formData.append("description", item_message.description);
-      if (item_message.images.length !== 0) {
-        for(const image of item_message.images){
-          formData.append("files", image);
-        }
-      } else {
-        formData.append("files", new File(["brak"], "brak.txt"));
-      }
+    const canSend = computed(
+      () => form.name.trim() !== "" && form.email.trim() !== "" && form.description.trim() !== ""
+    );
 
-      const url = "";
-      const method = "POST";
-      const headers = {};
+    const sendMessage = () => {
+      if (!canSend.value) return;
+      store.dispatch("contact/apiCreateContact", {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        subject: form.subject.trim() === "" ? null : form.subject.trim(),
+        phone: form.phone.trim() === "" ? null : form.phone.trim(),
+        description: form.description.trim(),
+      });
 
-      const response = await fetchData(
-        url,
-        method,
-        headers,
-        formData,
-        "formData"
-      );
-      notification(response);
-
-      item_message.name = "";
-      item_message.email = "";
-      item_message.description = "";
-      item_message.images = [];
+      form.name = "";
+      form.email = "";
+      form.subject = "";
+      form.phone = "";
+      form.description = "";
     };
 
-    return { sendMessage, item_message };
+    return { t, form, canSend, sendMessage };
   },
 };
 </script>
@@ -133,12 +130,6 @@ export default {
         justify-content: center;
         gap: 1rem;
       }
-      p {
-        width: 100%;
-        text-align: center;
-        font-size: 20px;
-        color: white;
-      }
       .button {
         width: 100%;
         display: flex;
@@ -164,7 +155,12 @@ export default {
             font-size: 18px;
           }
         }
-        button:hover{
+        button:disabled {
+          opacity: 0.5;
+          box-shadow: none;
+          cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
           box-shadow: none;
         }
       }
@@ -177,9 +173,6 @@ export default {
     .box__contact {
       width: 80%;
       form {
-        p{
-          font-size: 25px;
-        }
         .inputs {
           flex-direction: row;
         }

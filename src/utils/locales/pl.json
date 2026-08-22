@@ -49,6 +49,15 @@
       "expert": "Znajomość ekspercka"
     }
   },
+  "contact": {
+    "title": "Skontaktuj się ze Mną!",
+    "name": "Imię i nazwisko",
+    "email": "E-mail",
+    "subject": "Temat",
+    "phone": "Telefon",
+    "description": "Opis wiadomości",
+    "send": "Wyślij wiadomość"
+  },
   "work": {
     "present": "obecnie",
     "showMore": "więcej",
@@ -138,6 +147,23 @@
       "updateImage": "Zaktualizuj obrazek",
       "scaleTitle": "Skala poziomu umiejętności",
       "currentLevel": "Aktualny poziom:"
+    },
+    "contact": {
+      "title": "Wiadomości",
+      "empty": "Brak wiadomości",
+      "view": "Zobacz",
+      "delete": "Usuń",
+      "read": "Przeczytane",
+      "unread": "Nieprzeczytane",
+      "detailTitle": "Szczegóły wiadomości",
+      "name": "Imię i nazwisko",
+      "email": "E-mail",
+      "phone": "Telefon",
+      "subject": "Temat",
+      "description": "Wiadomość",
+      "sentAt": "Wysłano",
+      "close": "Zamknij",
+      "noSubject": "(bez tematu)"
     }
   }
 }

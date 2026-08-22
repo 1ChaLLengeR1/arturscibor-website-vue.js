@@ -49,6 +49,15 @@
       "expert": "Expert"
     }
   },
+  "contact": {
+    "title": "Get in touch!",
+    "name": "Full name",
+    "email": "E-mail",
+    "subject": "Subject",
+    "phone": "Phone",
+    "description": "Message",
+    "send": "Send message"
+  },
   "work": {
     "present": "present",
     "showMore": "more",
@@ -138,6 +147,23 @@
       "updateImage": "Update image",
       "scaleTitle": "Skill level scale",
       "currentLevel": "Current level:"
+    },
+    "contact": {
+      "title": "Messages",
+      "empty": "No messages",
+      "view": "View",
+      "delete": "Delete",
+      "read": "Read",
+      "unread": "Unread",
+      "detailTitle": "Message details",
+      "name": "Full name",
+      "email": "E-mail",
+      "phone": "Phone",
+      "subject": "Subject",
+      "description": "Message",
+      "sentAt": "Sent",
+      "close": "Close",
+      "noSubject": "(no subject)"
     }
   }
 }
