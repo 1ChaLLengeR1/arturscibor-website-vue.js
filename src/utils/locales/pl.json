@@ -51,6 +51,19 @@
       "expert": "Znajomość ekspercka"
     }
   },
+  "projects": {
+    "readMore": "Zobacz projekt",
+    "github": "Kod źródłowy",
+    "live": "Zobacz na żywo",
+    "completedAt": "Ukończono",
+    "backLink": "Wróć do projektów",
+    "level": {
+      "beginner": "Początkujący",
+      "intermediate": "Średniozaawansowany",
+      "advanced": "Zaawansowany",
+      "expert": "Ekspercki"
+    }
+  },
   "contact": {
     "title": "Skontaktuj się ze Mną!",
     "name": "Imię i nazwisko",
@@ -173,6 +186,34 @@
       "close": "Zamknij",
       "noSubject": "(bez tematu)",
       "confirmDelete": "Czy na pewno chcesz usunąć wiadomość od „{name}”?"
+    },
+    "projects": {
+      "addProjectTitle": "Dodaj projekt",
+      "name": "Nazwa",
+      "shortDescriptionPl": "Krótki opis (PL)",
+      "shortDescriptionEn": "Krótki opis (EN)",
+      "descriptionPl": "Opis (PL)",
+      "descriptionEn": "Opis (EN)",
+      "level": "Poziom",
+      "technologies": "Technologie (oddzielone przecinkiem)",
+      "githubUrl": "Link do GitHub",
+      "liveUrl": "Link do wersji live",
+      "completedAt": "Data ukończenia",
+      "displayOrder": "Kolejność wyświetlania",
+      "optional": "Opcjonalne",
+      "addProject": "Dodaj projekt",
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "projectTitle": "Projekt",
+      "shortDescription": "Krótki opis ({lang})",
+      "description": "Opis ({lang})",
+      "saveChanges": "Zapisz zmiany",
+      "imagesTitle": "Zdjęcia",
+      "uploadImage": "Dodaj zdjęcie!",
+      "addImage": "Dodaj do galerii",
+      "removeImage": "Usuń",
+      "confirmDeleteProject": "Czy na pewno chcesz usunąć projekt „{name}” wraz ze wszystkimi jego zdjęciami?",
+      "confirmRemoveImage": "Czy na pewno chcesz usunąć to zdjęcie z galerii?"
     }
   }
 }

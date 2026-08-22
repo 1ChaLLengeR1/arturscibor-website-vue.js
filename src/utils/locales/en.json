@@ -51,6 +51,19 @@
       "expert": "Expert"
     }
   },
+  "projects": {
+    "readMore": "View project",
+    "github": "Source code",
+    "live": "Live demo",
+    "completedAt": "Completed",
+    "backLink": "Back to projects",
+    "level": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "expert": "Expert"
+    }
+  },
   "contact": {
     "title": "Get in touch!",
     "name": "Full name",
@@ -173,6 +186,34 @@
       "close": "Close",
       "noSubject": "(no subject)",
       "confirmDelete": "Are you sure you want to delete the message from \"{name}\"?"
+    },
+    "projects": {
+      "addProjectTitle": "Add project",
+      "name": "Name",
+      "shortDescriptionPl": "Short description (PL)",
+      "shortDescriptionEn": "Short description (EN)",
+      "descriptionPl": "Description (PL)",
+      "descriptionEn": "Description (EN)",
+      "level": "Level",
+      "technologies": "Technologies (comma separated)",
+      "githubUrl": "GitHub link",
+      "liveUrl": "Live link",
+      "completedAt": "Completion date",
+      "displayOrder": "Display order",
+      "optional": "Optional",
+      "addProject": "Add project",
+      "edit": "Edit",
+      "delete": "Delete",
+      "projectTitle": "Project",
+      "shortDescription": "Short description ({lang})",
+      "description": "Description ({lang})",
+      "saveChanges": "Save changes",
+      "imagesTitle": "Images",
+      "uploadImage": "Add image!",
+      "addImage": "Add to gallery",
+      "removeImage": "Remove",
+      "confirmDeleteProject": "Are you sure you want to delete the project \"{name}\" along with all its images?",
+      "confirmRemoveImage": "Are you sure you want to remove this image from the gallery?"
     }
   }
 }

@@ -1,34 +1,18 @@
 <template>
-  <ul class="main__listProjects__container">
-    <li v-for="item in loadProjects" :key="item">
-      <p>{{ item.name_project }}</p>
+  <ul class="list__projects__container">
+    <li class="item" v-for="project in collection" :key="project.id">
+      <img
+        v-if="resolveFileUrl(project.images[0]?.url)"
+        class="thumb"
+        :src="resolveFileUrl(project.images[0]?.url)"
+        :alt="project.name"
+      />
+      <div class="info">
+        <p class="name">{{ project.name }}</p>
+      </div>
       <div class="icons">
-        <svg
-          id="Layer_1"
-          data-name="Layer 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 122.88 121.51"
-          @click="showEditProject(item.id)"
-        >
-          <title>edit</title>
-          <path
-            d="M28.66,1.64H58.88L44.46,16.71H28.66a13.52,13.52,0,0,0-9.59,4l0,0a13.52,13.52,0,0,0-4,9.59v76.14H91.21a13.5,13.5,0,0,0,9.59-4l0,0a13.5,13.5,0,0,0,4-9.59V77.3l15.07-15.74V92.85a28.6,28.6,0,0,1-8.41,20.22l0,.05a28.58,28.58,0,0,1-20.2,8.39H11.5a11.47,11.47,0,0,1-8.1-3.37l0,0A11.52,11.52,0,0,1,0,110V30.3A28.58,28.58,0,0,1,8.41,10.09L8.46,10a28.58,28.58,0,0,1,20.2-8.4ZM73,76.47l-29.42,6,4.25-31.31L73,76.47ZM57.13,41.68,96.3.91A2.74,2.74,0,0,1,99.69.38l22.48,21.76a2.39,2.39,0,0,1-.19,3.57L82.28,67,57.13,41.68Z"
-          />
-        </svg>
-        <svg
-          @click.prevent="deleteProject(item.id)"
-          xmlns="http://www.w3.org/2000/svg"
-          x="0px"
-          y="0px"
-          width="30"
-          height="30"
-          viewBox="0 0 30 30"
-        >
-          <title>delete</title>
-          <path
-            d="M 13 3 A 1.0001 1.0001 0 0 0 11.986328 4 L 6 4 A 1.0001 1.0001 0 1 0 6 6 L 24 6 A 1.0001 1.0001 0 1 0 24 4 L 18.013672 4 A 1.0001 1.0001 0 0 0 17 3 L 13 3 z M 6 8 L 6 24 C 6 25.105 6.895 26 8 26 L 22 26 C 23.105 26 24 25.105 24 24 L 24 8 L 6 8 z"
-          ></path>
-        </svg>
+        <v-btn color="blue" @click="showEditProject(project.id)">{{ t("admin.projects.edit") }}</v-btn>
+        <v-btn color="black" @click="deleteProject(project)">{{ t("admin.projects.delete") }}</v-btn>
       </div>
     </li>
   </ul>
@@ -37,98 +21,79 @@
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
-import { notification } from "../JS/Notification";
-import { fetchData } from "../JS/fetch";
+import { useI18n } from "vue-i18n";
+import { resolveFileUrl } from "../../utils/url";
+import { requestConfirm } from "../../utils/confirm";
+
 export default {
   emits: ["show-edit-project"],
-  setup(_, context) {
-    //values
+  setup(_, { emit }) {
     const store = useStore();
+    const { t } = useI18n();
 
-    //functions
+    const collection = computed(() => store.getters["projects/collection"]);
 
-    const showEditProject = (id) => {
-      context.emit("show-edit-project", {
-        show: true,
-        id_project: id,
+    const showEditProject = (projectId) => {
+      emit("show-edit-project", { show: true, projectId });
+    };
+
+    const deleteProject = (project) => {
+      requestConfirm(store, {
+        message: t("admin.projects.confirmDeleteProject", { name: project.name }),
+        onConfirm: () => store.dispatch("projects/apiDeleteProject", project.id),
       });
     };
 
-    store.dispatch("admin/loadProjects");
-
-    const deleteProject = async (id) => {
-      const url = "";
-      const method = "DELETE";
-      const headers = {
-        Authorization: `Bearer ${store.getters["auth/optionsTokens"].access_token}`,
-        "Content-Type": "application/json",
-      };
-      const body = { id: id };
-      const response = await fetchData(url, method, headers, body, "body");
-      notification(response);
-      store.dispatch("admin/loadProjects");
-    };
-
-    //computed
-    const loadProjects = computed(() => {
-      return store.getters["admin/loadProjects"];
-    });
-
-    return { loadProjects, deleteProject, showEditProject };
+    return { t, collection, showEditProject, deleteProject, resolveFileUrl };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.main__listProjects__container {
+.list__projects__container {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 0.5rem;
   list-style: none;
-  li {
+  padding: 0.5rem;
+
+  .item {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
     background-color: white;
     color: black;
     padding: 0.5rem;
     border-radius: 8px;
     box-shadow: 0px 0px 10px 2px rgb(71, 71, 71);
 
-    p {
-      font-size: 20px;
-      font-weight: bold;
+    .thumb {
+      width: 3rem;
+      height: 3rem;
+      object-fit: cover;
+      border-radius: 4px;
     }
+
+    .info {
+      flex: 1;
+
+      .name {
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+    }
+
     .icons {
-      width: max-content;
       display: flex;
-      align-items: center;
-      gap: 2rem;
-      svg {
-        width: 2rem;
-        height: 2rem;
-        fill: blue;
-        cursor: pointer;
-      }
-      svg:nth-child(even) {
-        fill: red;
-      }
+      gap: 0.5rem;
     }
   }
 }
 @media (min-width: 750px) {
-  .main__listProjects__container {
+  .list__projects__container {
     width: 70%;
-
-    li{
-      p{
-        font-size: 30px;
-      }
-      .icons{
-        gap: 3rem;
-      }
-    }
   }
 }
 </style>
