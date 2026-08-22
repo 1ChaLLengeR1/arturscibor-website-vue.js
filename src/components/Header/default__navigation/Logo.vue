@@ -1,6 +1,16 @@
 <template>
-    <router-link class="logo" :to="{name:'pass'}">Portfolio.</router-link>
+    <router-link class="logo" :to="{name:'pass'}">{{ t("brand.logo") }}</router-link>
 </template>
+
+<script>
+import { useI18n } from "vue-i18n";
+export default {
+    setup() {
+        const { t } = useI18n();
+        return { t };
+    },
+};
+</script>
 
 <style lang="scss" scoped>
     .logo{

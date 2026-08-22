@@ -1,46 +1,53 @@
 <template>
   <header>
     <Transition name="sildeBar">
-      <slidebar-default
+      <SlideBarDefault
         v-if="sildeBar.activeClass && sildeBar.name === 'default'"
         :arrayLinks="arrayDefoultLinks"
         :position="true"
         :activeButton="false"
         @off-slidebar="offSlidebarLinks"
-      ></slidebar-default>
+      ></SlideBarDefault>
     </Transition>
-    <the-logo></the-logo>
-    <nav v-if="mobile" class="navbar">
-      <router-link
-        v-for="(item, index) in arrayDefoultLinks"
-        :key="item"
-        :to="{ name: item.link_name }"
-        :style="'--i:'+index+';'"
-        >{{ item.name }}</router-link
-      >
-    </nav>
-    <toggle-button
-      v-if="!mobile"
-      name="default"
-      :reset="resetToggle"
-      @toggle-button="toggleButtonFunction"
-    ></toggle-button>
+    <Logo></Logo>
+    <div class="right__side">
+      <nav v-if="mobile" class="navbar">
+        <router-link
+          v-for="(item, index) in arrayDefoultLinks"
+          :key="item.link_name"
+          :to="{ name: item.link_name }"
+          :style="'--i:'+index+';'"
+          >{{ t(item.labelKey) }}</router-link
+        >
+      </nav>
+      <LanguageSwitcher></LanguageSwitcher>
+      <ToggleButton
+        v-if="!mobile"
+        name="default"
+        :reset="resetToggle"
+        @toggle-button="toggleButtonFunction"
+      ></ToggleButton>
+    </div>
   </header>
 </template>
 
 <script>
 import Logo from "./Logo.vue";
-import ToggleButton from "./ToggleButton.vue";
+import ToggleButton from "../ToggleButton.vue";
 import SlideBarDefault from "./SlideBar.vue";
-import ArrayDefoultLinks from "../../JS/ArrayLinksDefoult.js";
+import LanguageSwitcher from "../../util/LanguageSwitcher.vue";
+import ArrayDefoultLinks from "../../JS/ArrayLinksDefoult";
 import { ref, reactive  } from "vue";
+import { useI18n } from "vue-i18n";
 export default {
   components: {
-    "the-logo": Logo,
-    "toggle-button": ToggleButton,
-    "slidebar-default": SlideBarDefault,
+    Logo,
+    ToggleButton,
+    SlideBarDefault,
+    LanguageSwitcher,
   },
   setup() {
+    const { t } = useI18n();
     const arrayDefoultLinks = ref(ArrayDefoultLinks);
     const mobile = ref(false);
     const sildeBar = reactive({
@@ -73,6 +80,7 @@ export default {
     checkSreenWidth();
 
     return {
+      t,
       mobile,
       sildeBar,
       arrayDefoultLinks,
@@ -95,6 +103,12 @@ header {
   align-items: center;
   padding: 0.5rem;
   background: var(--bg-color);
+
+  .right__side {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
 
   .navbar {
     display: flex;

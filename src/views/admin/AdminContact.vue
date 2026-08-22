@@ -1,12 +1,12 @@
 <template>
   <div class="main__contact__container">
-    <look-message
+    <LookMessage
       v-if="openMessage.open"
       :id="openMessage.id"
       @close-message="closeMessage"
-    ></look-message>
-    <the-header title="Wiadomości"></the-header>
-    <the-form @open-message="messageValue"></the-form>
+    ></LookMessage>
+    <Header title="Wiadomości"></Header>
+    <Form @open-message="messageValue"></Form>
   </div>
 </template>
 
@@ -17,9 +17,9 @@ import Form from "../../components/AdminContact/Form.vue";
 import LookMessage from "../../components/AdminContact/LookMessage.vue";
 export default {
   components: {
-    "the-header": Header,
-    "the-form": Form,
-    "look-message": LookMessage,
+    Header,
+    Form,
+    LookMessage,
   },
   setup() {
     //values

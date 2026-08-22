@@ -1,12 +1,12 @@
 <template>
   <div class="main__container__projects">
-    <edit-project
+    <EditProject
       v-if="edit_panel.show"
       @close-edit-project="closeEditProject"
       :id="edit_panel.id_project"
-    ></edit-project>
-    <add-project></add-project>
-    <list-projects @show-edit-project="showEditProject"></list-projects>
+    ></EditProject>
+    <AddProject></AddProject>
+    <ListProjects @show-edit-project="showEditProject"></ListProjects>
   </div>
 </template>
 
@@ -17,9 +17,9 @@ import AddProject from "../../components/AdminProjects/AddProject.vue";
 import ListProjects from "../../components/AdminProjects/ListProjects.vue";
 export default {
   components: {
-    "add-project": AddProject,
-    "list-projects": ListProjects,
-    "edit-project": EditProject,
+    AddProject,
+    ListProjects,
+    EditProject,
   },
   setup() {
     //values

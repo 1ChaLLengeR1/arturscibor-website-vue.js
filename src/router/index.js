@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 //DefaultPanel
 import Home from "../views/Home.vue";
+import Work from "../views/Work.vue";
 import Tools from "../views/Tools.vue";
 import Projects from "../views/Projects.vue";
 import Contact from "../views/Contact.vue";
@@ -17,6 +18,7 @@ import AdminHome from "../views/admin/AdminHome.vue";
 import AdminTools from "../views/admin/AdminTools.vue";
 import AdminProjects from "../views/admin/AdminProjects.vue";
 import AdminContact from '../views/admin/AdminContact.vue'
+import AdminWork from "../views/admin/AdminWork.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -30,6 +32,11 @@ const router = createRouter({
       name: "home",
       path: "/home",
       component: Home,
+    },
+    {
+      name: "work",
+      path: "/work",
+      component: Work,
     },
     {
       name: "tools",
@@ -79,6 +86,12 @@ const router = createRouter({
       path:'/admincontact',
       component: AdminContact,
       meta: {auth: true}
+    },
+    {
+      name: "adminwork",
+      path: "/adminwork",
+      component: AdminWork,
+      meta: { auth: true },
     },
     {
       name: "not-found",

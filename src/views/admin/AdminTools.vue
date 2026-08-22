@@ -1,7 +1,7 @@
 <template>
   <div class="main__container__tools">
-    <add-items></add-items>
-    <delete-modification-item></delete-modification-item>
+    <AddItem></AddItem>
+    <DeleteModificationItem></DeleteModificationItem>
   </div>
 </template>
 
@@ -11,8 +11,8 @@ import AddItem from "../../components/AdminTools/AddItem.vue";
 import DeleteModificationItem from "../../components/AdminTools/DeleteModificationItem.vue";
 export default {
   components: {
-    "add-items": AddItem,
-    "delete-modification-item": DeleteModificationItem
+    AddItem,
+    DeleteModificationItem
   },
   setup() {
     // values

@@ -16,5 +16,92 @@
   },
   "footer": {
     "copyright": "©Copyright {year} Artur Ścibor. All rights reserved."
+  },
+  "brand": {
+    "logo": "Portfolio."
+  },
+  "nav": {
+    "home": "Home",
+    "work": "Experience",
+    "tools": "Tools",
+    "projects": "Projects",
+    "contact": "Contact",
+    "signin": "Sign in",
+    "logout": "Log out!",
+    "navigationPanel": "Navigation Panel",
+    "adminPanel": "Admin Panel",
+    "adminHome": "AdminHome",
+    "adminTools": "AdminTools",
+    "adminProjects": "AdminProjects",
+    "adminContact": "AdminContact",
+    "adminWork": "AdminWork"
+  },
+  "work": {
+    "title": "Experience",
+    "present": "present",
+    "showMore": "more",
+    "showLess": "less",
+    "skillsMore": "and {count} more skills",
+    "employmentType": {
+      "full_time": "Full-time",
+      "part_time": "Part-time",
+      "contract": "Contract",
+      "b2b": "B2B",
+      "internship": "Internship",
+      "volunteer": "Volunteer"
+    }
+  },
+  "admin": {
+    "aboutme": {
+      "infoTitle": "Information",
+      "fullName": "Full name",
+      "fullNameHint": "This field isn't translated — shared between both languages",
+      "jobTitle": "Job title ({lang})",
+      "description": "Description ({lang})",
+      "save": "Save!",
+      "photosTitle": "Photos",
+      "photoPreview": "Photo preview",
+      "delete": "Delete",
+      "uploadPhoto": "Upload a photo!",
+      "addPhoto": "Add photo",
+      "cvTitle": "CV",
+      "cvPreview": "Preview current CV",
+      "uploadCv": "Upload CV!",
+      "updateCv": "Update CV!"
+    },
+    "work": {
+      "addCompanyTitle": "Add company",
+      "companyName": "Company name",
+      "displayOrder": "Display order",
+      "optional": "Optional",
+      "addCompany": "Add company",
+      "positionsCount": "Positions: {count}",
+      "edit": "Edit",
+      "delete": "Delete",
+      "companyTitle": "Company",
+      "saveChanges": "Save changes",
+      "logoTitle": "Logo",
+      "removeLogo": "Remove logo",
+      "uploadLogo": "Upload logo!",
+      "updateLogo": "Update logo",
+      "positionsTitle": "Positions ({lang})",
+      "position": "Position ({lang})",
+      "employmentType": "Employment type",
+      "location": "Location ({lang})",
+      "dateFrom": "From",
+      "dateTo": "To",
+      "description": "Description ({lang})",
+      "skills": "Skills (comma separated)",
+      "saveItem": "Save position",
+      "deleteItem": "Delete position",
+      "addItemTitle": "Add position",
+      "addItem": "Add position",
+      "positionPl": "Position (PL)",
+      "positionEn": "Position (EN)",
+      "locationPl": "Location (PL)",
+      "locationEn": "Location (EN)",
+      "descriptionPl": "Description (PL)",
+      "descriptionEn": "Description (EN)"
+    }
   }
 }

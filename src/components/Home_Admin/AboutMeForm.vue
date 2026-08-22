@@ -1,7 +1,7 @@
 <template>
   <div class="aboutme__infomration__container">
     <form class="aboutme__information__box" @submit.prevent="save">
-      <h3>Informacje</h3>
+      <h3>{{ t("admin.aboutme.infoTitle") }}</h3>
       <div class="language__switch">
         <v-btn
           :color="language === 'pl' ? 'blue' : undefined"
@@ -18,61 +18,51 @@
       </div>
       <v-text-field
         bg-color="white"
-        label="Imię i nazwisko"
-        hint="Pole nie jest tłumaczone — wspólne dla obu języków"
+        :label="t('admin.aboutme.fullName')"
+        :hint="t('admin.aboutme.fullNameHint')"
         persistent-hint
         v-model="form.name"
       ></v-text-field>
       <v-text-field
         bg-color="white"
-        :label="`Stanowisko (${language.toUpperCase()})`"
+        :label="t('admin.aboutme.jobTitle', { lang: language.toUpperCase() })"
         v-model="form.job_title"
       ></v-text-field>
       <v-textarea
         variant="filled"
-        :label="`Opis (${language.toUpperCase()})`"
+        :label="t('admin.aboutme.description', { lang: language.toUpperCase() })"
         auto-grow
         bg-color="white"
         v-model="form.body_markdown"
       ></v-textarea>
-      <v-btn @click="save" color="blue"> Zaaktualizuj! </v-btn>
+      <v-btn @click="save" color="blue">{{ t("admin.aboutme.save") }}</v-btn>
 
-      <h3>Zdjęcia</h3>
+      <h3>{{ t("admin.aboutme.photosTitle") }}</h3>
       <ul class="show__files">
         <li class="item" v-for="img in aboutMe?.images ?? []" :key="img.file_id">
-          <a :href="resolveFileUrl(img.url)" target="_blank" alt="zdjecie">Podgląd zdjęcia</a>
-          <v-btn color="black" @click="detachImage(img.file_id)">Usuń</v-btn>
+          <a :href="resolveFileUrl(img.url)" target="_blank">{{ t("admin.aboutme.photoPreview") }}</a>
+          <v-btn color="black" @click="detachImage(img.file_id)">{{ t("admin.aboutme.delete") }}</v-btn>
         </li>
       </ul>
-      <v-file-input
-        bg-color="white"
-        show-size
-        counter
+      <UploadFile
         accept="image/*"
-        label="Załaduj zdjęcie!"
-        v-model="file"
-      ></v-file-input>
-      <v-btn @click="uploadImage" :disabled="file.length !== 1" color="blue">
-        Dodaj zdjęcie
-      </v-btn>
+        :label="t('admin.aboutme.uploadPhoto')"
+        :buttonLabel="t('admin.aboutme.addPhoto')"
+        @upload="uploadImage"
+      ></UploadFile>
 
-      <h3>CV</h3>
+      <h3>{{ t("admin.aboutme.cvTitle") }}</h3>
       <ul class="show__files" v-if="cv?.url">
         <li class="item">
-          <a :href="resolveFileUrl(cv.url)" target="_blank" alt="cv">Podgląd aktualnego CV</a>
+          <a :href="resolveFileUrl(cv.url)" target="_blank">{{ t("admin.aboutme.cvPreview") }}</a>
         </li>
       </ul>
-      <v-file-input
-        bg-color="white"
-        show-size
-        counter
+      <UploadFile
         accept="application/pdf"
-        label="Załaduj CV!"
-        v-model="cvFile"
-      ></v-file-input>
-      <v-btn @click="uploadCvFile" :disabled="cvFile.length !== 1" color="blue">
-        Zaktualizuj CV!
-      </v-btn>
+        :label="t('admin.aboutme.uploadCv')"
+        :buttonLabel="t('admin.aboutme.updateCv')"
+        @upload="uploadCvFile"
+      ></UploadFile>
     </form>
   </div>
 </template>
@@ -80,18 +70,22 @@
 <script>
 import { ref, computed, watch, reactive } from "vue";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 import { resolveFileUrl } from "../../utils/url";
+import UploadFile from "../util/UploadFile.vue";
 export default {
+  components: {
+    UploadFile,
+  },
   setup() {
     const store = useStore();
+    const { t } = useI18n();
     const language = ref("pl");
     const form = reactive({
       name: "",
       job_title: "",
       body_markdown: "",
     });
-    const file = ref([]);
-    const cvFile = ref([]);
 
     const loadAboutMe = () => {
       store.dispatch("aboutme/apiGetAboutMe", language.value);
@@ -121,27 +115,22 @@ export default {
       store.dispatch("aboutme/apiUpdateAboutMe", { ...form, language_code: language.value });
     };
 
-    const uploadImage = () => {
-      if (file.value.length !== 1) return;
-      store.dispatch("aboutme/apiUploadAboutMeImage", file.value[0]);
-      file.value = [];
+    const uploadImage = (file) => {
+      store.dispatch("aboutme/apiUploadAboutMeImage", file);
     };
 
     const detachImage = (fileId) => {
       store.dispatch("aboutme/apiDetachAboutMeImage", fileId);
     };
 
-    const uploadCvFile = () => {
-      if (cvFile.value.length !== 1) return;
-      store.dispatch("cv/apiUploadCv", cvFile.value[0]);
-      cvFile.value = [];
+    const uploadCvFile = (file) => {
+      store.dispatch("cv/apiUploadCv", file);
     };
 
     return {
+      t,
       language,
       form,
-      file,
-      cvFile,
       aboutMe,
       cv,
       switchLanguage,
