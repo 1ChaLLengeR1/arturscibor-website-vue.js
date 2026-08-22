@@ -44,17 +44,12 @@
           <v-btn color="black" @click="detachImage(img.file_id)">Usuń</v-btn>
         </li>
       </ul>
-      <v-file-input
-        bg-color="white"
-        show-size
-        counter
+      <UploadFile
         accept="image/*"
         label="Załaduj zdjęcie!"
-        v-model="file"
-      ></v-file-input>
-      <v-btn @click="uploadImage" :disabled="file.length !== 1" color="blue">
-        Dodaj zdjęcie
-      </v-btn>
+        buttonLabel="Dodaj zdjęcie"
+        @upload="uploadImage"
+      ></UploadFile>
 
       <h3>CV</h3>
       <ul class="show__files" v-if="cv?.url">
@@ -62,17 +57,12 @@
           <a :href="resolveFileUrl(cv.url)" target="_blank" alt="cv">Podgląd aktualnego CV</a>
         </li>
       </ul>
-      <v-file-input
-        bg-color="white"
-        show-size
-        counter
+      <UploadFile
         accept="application/pdf"
         label="Załaduj CV!"
-        v-model="cvFile"
-      ></v-file-input>
-      <v-btn @click="uploadCvFile" :disabled="cvFile.length !== 1" color="blue">
-        Zaktualizuj CV!
-      </v-btn>
+        buttonLabel="Zaktualizuj CV!"
+        @upload="uploadCvFile"
+      ></UploadFile>
     </form>
   </div>
 </template>
@@ -81,7 +71,11 @@
 import { ref, computed, watch, reactive } from "vue";
 import { useStore } from "vuex";
 import { resolveFileUrl } from "../../utils/url";
+import UploadFile from "../util/UploadFile.vue";
 export default {
+  components: {
+    UploadFile,
+  },
   setup() {
     const store = useStore();
     const language = ref("pl");
@@ -90,8 +84,6 @@ export default {
       job_title: "",
       body_markdown: "",
     });
-    const file = ref([]);
-    const cvFile = ref([]);
 
     const loadAboutMe = () => {
       store.dispatch("aboutme/apiGetAboutMe", language.value);
@@ -121,27 +113,21 @@ export default {
       store.dispatch("aboutme/apiUpdateAboutMe", { ...form, language_code: language.value });
     };
 
-    const uploadImage = () => {
-      if (file.value.length !== 1) return;
-      store.dispatch("aboutme/apiUploadAboutMeImage", file.value[0]);
-      file.value = [];
+    const uploadImage = (file) => {
+      store.dispatch("aboutme/apiUploadAboutMeImage", file);
     };
 
     const detachImage = (fileId) => {
       store.dispatch("aboutme/apiDetachAboutMeImage", fileId);
     };
 
-    const uploadCvFile = () => {
-      if (cvFile.value.length !== 1) return;
-      store.dispatch("cv/apiUploadCv", cvFile.value[0]);
-      cvFile.value = [];
+    const uploadCvFile = (file) => {
+      store.dispatch("cv/apiUploadCv", file);
     };
 
     return {
       language,
       form,
-      file,
-      cvFile,
       aboutMe,
       cv,
       switchLanguage,

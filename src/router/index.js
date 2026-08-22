@@ -18,6 +18,7 @@ import AdminHome from "../views/admin/AdminHome.vue";
 import AdminTools from "../views/admin/AdminTools.vue";
 import AdminProjects from "../views/admin/AdminProjects.vue";
 import AdminContact from '../views/admin/AdminContact.vue'
+import AdminWork from "../views/admin/AdminWork.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -85,6 +86,12 @@ const router = createRouter({
       path:'/admincontact',
       component: AdminContact,
       meta: {auth: true}
+    },
+    {
+      name: "adminwork",
+      path: "/adminwork",
+      component: AdminWork,
+      meta: { auth: true },
     },
     {
       name: "not-found",

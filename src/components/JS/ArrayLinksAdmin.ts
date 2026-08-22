@@ -17,6 +17,10 @@ const links: NavLink[] = [
     labelKey: "nav.adminContact",
     link_name: "admincontact",
   },
+  {
+    labelKey: "nav.adminWork",
+    link_name: "adminwork",
+  },
 ];
 
 export default links;

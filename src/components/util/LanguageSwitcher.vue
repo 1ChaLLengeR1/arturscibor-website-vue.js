@@ -16,6 +16,8 @@
 
 <script>
 import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 import { LOCALE_STORAGE_KEY } from "../../utils/i18n";
 
 const LANGUAGES = [
@@ -23,13 +25,27 @@ const LANGUAGES = [
   { code: "en", flag: "🇬🇧" },
 ];
 
+/** Akcje Vuex zależne od języka (przyjmują `lang`), do odświeżenia po zmianie języka na danej stronie. */
+const LANG_REFRESH_ACTIONS = {
+  pass: ["aboutme/apiGetAboutMe"],
+  home: ["aboutme/apiGetAboutMe"],
+  work: ["work/apiGetWorkCollection"],
+  tools: ["tools/apiGetToolsCollection"],
+  projects: ["projects/apiGetProjectsCollection"],
+};
+
 export default {
   setup() {
     const { locale } = useI18n();
+    const route = useRoute();
+    const store = useStore();
 
     const setLocale = (code) => {
       locale.value = code;
       localStorage.setItem(LOCALE_STORAGE_KEY, code);
+
+      const actions = LANG_REFRESH_ACTIONS[route.name] ?? [];
+      actions.forEach((action) => store.dispatch(action, code));
     };
 
     return { locale, languages: LANGUAGES, setLocale };
@@ -45,8 +61,6 @@ export default {
 
   .language__button {
     background: transparent;
-    border: 2px solid transparent;
-    border-radius: 50%;
     font-size: 1.5rem;
     line-height: 1;
     padding: 0.25rem;
@@ -61,7 +75,6 @@ export default {
 
   .language__button.active {
     opacity: 1;
-    border-color: var(--main-color);
   }
 }
 </style>

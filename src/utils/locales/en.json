@@ -33,9 +33,22 @@
     "adminHome": "AdminHome",
     "adminTools": "AdminTools",
     "adminProjects": "AdminProjects",
-    "adminContact": "AdminContact"
+    "adminContact": "AdminContact",
+    "adminWork": "AdminWork"
   },
   "work": {
-    "title": "Experience"
+    "title": "Experience",
+    "present": "present",
+    "showMore": "more",
+    "showLess": "less",
+    "skillsMore": "and {count} more skills",
+    "employmentType": {
+      "full_time": "Full-time",
+      "part_time": "Part-time",
+      "contract": "Contract",
+      "b2b": "B2B",
+      "internship": "Internship",
+      "volunteer": "Volunteer"
+    }
   }
 }

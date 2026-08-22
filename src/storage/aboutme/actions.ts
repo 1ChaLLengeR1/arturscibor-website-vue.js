@@ -5,7 +5,7 @@ import type {
   AboutMeImageAttachPayload,
   AboutMeUpdatePayload,
 } from "../../api/aboutme/types";
-import { confirmFile, initFile, uploadFileBytes } from "../../api/common/file/post";
+import { uploadFileHandshake } from "../common/fileUpload";
 import { notifyError, notifySuccess } from "../common/notify";
 import type { RootState } from "../common/types";
 import type { AboutMeState } from "./state";
@@ -50,32 +50,13 @@ const actions: ActionTree<AboutMeState, RootState> = {
     commit("setAboutMe", result.data);
   },
 
-  /** Pełny handshake: init pliku -> wgranie bajtów -> potwierdzenie -> dopięcie do AboutMe. */
+  /** Handshake uploadu (init -> upload -> confirm) + dopięcie do AboutMe. */
   async apiUploadAboutMeImage({ commit }, file: File) {
-    const initResult = await initFile({
-      original_name: file.name,
-      size: file.size,
+    const fileId = await uploadFileHandshake(commit, file, {
       directory: "aboutme",
       file_type: "photo",
-      mime_type: file.type || null,
     });
-    if (initResult.status === "ERROR" || !initResult.data) {
-      notifyError(commit, initResult.status === "ERROR" ? initResult.data.message : "Nie udało się zainicjować uploadu.");
-      return;
-    }
-
-    const fileId = initResult.data.file_id;
-    const uploadResult = await uploadFileBytes(fileId, file);
-    if (uploadResult.status === "ERROR") {
-      notifyError(commit, uploadResult.data.message);
-      return;
-    }
-
-    const confirmResult = await confirmFile(fileId);
-    if (confirmResult.status === "ERROR") {
-      notifyError(commit, confirmResult.data.message);
-      return;
-    }
+    if (!fileId) return;
 
     const attachResult = await attachAboutMeImage({ file_id: fileId });
     if (attachResult.status === "ERROR") {
