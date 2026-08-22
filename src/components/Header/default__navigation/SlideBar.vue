@@ -26,7 +26,7 @@ export default {
         context.emit('off-slidebar', false)
     }
     const logout = () =>{
-      store.commit('auth/logout');
+      store.dispatch('auth/apiLogout');
       router.push({name:'signin'})
     }
     return {t, offSildeBar, logout}

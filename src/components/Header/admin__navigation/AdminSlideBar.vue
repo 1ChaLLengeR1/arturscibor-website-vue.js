@@ -66,7 +66,7 @@ export default {
     const close = () => emit("close");
 
     const logout = () => {
-      store.commit("auth/logout");
+      store.dispatch("auth/apiLogout");
       router.push({ name: "signin" });
       close();
     };

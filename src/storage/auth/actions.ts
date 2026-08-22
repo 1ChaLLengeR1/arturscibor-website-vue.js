@@ -1,6 +1,5 @@
 import type { ActionTree } from "vuex";
 import { refresh } from "../../api/auth/post";
-import router from "../../router/index";
 import type { RootState } from "../common/types";
 import type { AuthState } from "./state";
 
@@ -24,11 +23,17 @@ function readStoredUser(): StoredUser | null {
 }
 
 const actions: ActionTree<AuthState, RootState> = {
-  async apiRefreshTokens({ commit }) {
+  /**
+   * Przywraca sesję z localStorage (odświeża token) bez żadnej nawigacji - bezpieczne
+   * do wywołania raz przy starcie aplikacji, niezależnie od tego, na jakiej stronie
+   * (publicznej czy admina) użytkownik akurat jest po odświeżeniu przeglądarki.
+   * Zwraca true, jeśli sesja została przywrócona.
+   */
+  async apiRestoreSession({ commit }): Promise<boolean> {
     const storedUser = readStoredUser();
     if (!storedUser) {
       commit("util/navigationAdmin", true, { root: true });
-      return;
+      return false;
     }
 
     const result = await refresh({
@@ -39,13 +44,18 @@ const actions: ActionTree<AuthState, RootState> = {
     if (result.status === "ERROR") {
       commit("util/navigationAdmin", true, { root: true });
       commit("logout");
-      router.push({ name: "signin" });
-      return;
+      return false;
     }
 
     commit("loadTokens", result.data);
     commit("util/navigationAdmin", false, { root: true });
-    router.push({ name: "adminhome" });
+    return true;
+  },
+
+  /** Czyści sesję i przełącza nagłówek z powrotem na publiczny - jedyne poprawne miejsce do wylogowania. */
+  apiLogout({ commit }) {
+    commit("logout");
+    commit("util/navigationAdmin", true, { root: true });
   },
 };
 

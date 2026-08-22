@@ -60,10 +60,11 @@ export default {
     const router = useRouter();
     const store = useStore();
 
-    const autoLogin = () => {
-      store.dispatch("auth/apiRefreshTokens");
-    };
-    autoLogin();
+    // Sesja jest już przywrócona przez strażniczkę routera (auth/apiRestoreSession)
+    // zanim ten widok się zamontuje - jeśli mamy ważne tokeny, przeskocz od razu do panelu.
+    if (store.getters["auth/optionsTokens"].id_user !== null) {
+      router.push({ name: "adminhome" });
+    }
 
     const signIn = async () => {
       store.commit("util/loadingSpinner", true);
