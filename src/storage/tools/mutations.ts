@@ -6,6 +6,9 @@ const mutations: MutationTree<ToolsState> = {
   setCollection(state, payload: ToolResponseData[]) {
     state.collection = payload;
   },
+  setLang(state, payload: string | null) {
+    state.lang = payload;
+  },
 };
 
 export default mutations;

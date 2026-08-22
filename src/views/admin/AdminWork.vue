@@ -19,6 +19,7 @@
 
     <EditCompany
       v-if="edit_panel.show"
+      ref="editPanelRef"
       :id="edit_panel.workId"
       :language="language"
       @close-edit-company="closeEditCompany"
@@ -29,7 +30,7 @@
 </template>
 
 <script>
-import { reactive, ref } from "vue";
+import { nextTick, reactive, ref } from "vue";
 import { useStore } from "vuex";
 import AddCompany from "../../components/AdminWork/AddCompany.vue";
 import ListCompanies from "../../components/AdminWork/ListCompanies.vue";
@@ -44,6 +45,7 @@ export default {
   setup() {
     const store = useStore();
     const language = ref("pl");
+    const editPanelRef = ref(null);
     const edit_panel = reactive({
       show: false,
       workId: null,
@@ -62,6 +64,9 @@ export default {
     const showEditCompany = (val) => {
       edit_panel.show = val.show;
       edit_panel.workId = val.workId;
+      nextTick(() => {
+        editPanelRef.value?.$el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
     };
 
     const closeEditCompany = (val) => {
@@ -70,6 +75,7 @@ export default {
 
     return {
       language,
+      editPanelRef,
       edit_panel,
       switchLanguage,
       showEditCompany,

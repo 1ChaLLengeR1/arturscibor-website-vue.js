@@ -36,6 +36,20 @@
     "adminContact": "AdminContact",
     "adminWork": "AdminWork"
   },
+  "tools": {
+    "intro": "To są narzędzia, z których korzystam w trakcie budowania strony",
+    "progressLabel": "Poziom umiejętności",
+    "moreLink": "Więcej na oficjalnej stronie",
+    "showMore": "Pokaż więcej",
+    "close": "Zamknij",
+    "skillLevel": {
+      "beginner": "Podstawowa znajomość",
+      "intermediate": "Średniozaawansowana znajomość",
+      "advanced": "Zaawansowana znajomość",
+      "veryGood": "Bardzo dobra znajomość",
+      "expert": "Znajomość ekspercka"
+    }
+  },
   "work": {
     "title": "Doświadczenie",
     "present": "obecnie",
@@ -102,6 +116,30 @@
       "locationEn": "Lokalizacja (EN)",
       "descriptionPl": "Opis (PL)",
       "descriptionEn": "Opis (EN)"
+    },
+    "tools": {
+      "addToolTitle": "Dodaj narzędzie",
+      "namePl": "Nazwa (PL)",
+      "nameEn": "Nazwa (EN)",
+      "informationPl": "Opis (PL)",
+      "informationEn": "Opis (EN)",
+      "progress": "Poziom umiejętności (0-100)",
+      "displayOrder": "Kolejność wyświetlania",
+      "optional": "Opcjonalne",
+      "link": "Link",
+      "addTool": "Dodaj narzędzie",
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "toolTitle": "Narzędzie",
+      "name": "Nazwa ({lang})",
+      "information": "Opis ({lang})",
+      "saveChanges": "Zapisz zmiany",
+      "imageTitle": "Obrazek",
+      "removeImage": "Usuń obrazek",
+      "uploadImage": "Załaduj obrazek!",
+      "updateImage": "Zaktualizuj obrazek",
+      "scaleTitle": "Skala poziomu umiejętności",
+      "currentLevel": "Aktualny poziom:"
     }
   }
 }
