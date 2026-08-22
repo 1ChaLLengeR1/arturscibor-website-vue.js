@@ -1,18 +1,20 @@
 <template>
   <div class="admin__work__container">
-    <div class="language__switch">
-      <v-btn
-        :color="language === 'pl' ? 'blue' : undefined"
-        @click="switchLanguage('pl')"
-      >
-        PL
-      </v-btn>
-      <v-btn
-        :color="language === 'en' ? 'blue' : undefined"
-        @click="switchLanguage('en')"
-      >
-        EN
-      </v-btn>
+    <div class="page__header">
+      <div class="language__switch">
+        <v-btn
+          :color="language === 'pl' ? 'blue' : undefined"
+          @click="switchLanguage('pl')"
+        >
+          PL
+        </v-btn>
+        <v-btn
+          :color="language === 'en' ? 'blue' : undefined"
+          @click="switchLanguage('en')"
+        >
+          EN
+        </v-btn>
+      </div>
     </div>
 
     <EditCompany
@@ -88,11 +90,25 @@ export default {
   gap: 2rem;
   padding: 0.5rem;
 
-  .language__switch {
+  .page__header {
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 0.5rem;
+
+    .language__switch {
+      width: 100%;
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+}
+@media (min-width: 750px) {
+  .admin__work__container {
+    .page__header {
+      width: 70%;
+    }
   }
 }
 </style>

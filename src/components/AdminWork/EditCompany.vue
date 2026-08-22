@@ -13,153 +13,153 @@
     </div>
 
     <form class="edit__company__box" @submit.prevent="saveCompany">
-      <h3>Firma</h3>
+      <h3>{{ t("admin.work.companyTitle") }}</h3>
       <v-text-field
         bg-color="white"
-        label="Nazwa firmy"
+        :label="t('admin.work.companyName')"
         v-model="form.company_name"
       ></v-text-field>
       <v-text-field
         type="number"
         bg-color="white"
-        label="Kolejność wyświetlania"
+        :label="t('admin.work.displayOrder')"
         v-model="form.numeric"
       ></v-text-field>
-      <v-btn @click="saveCompany" color="blue">Zapisz zmiany</v-btn>
+      <v-btn @click="saveCompany" color="blue">{{ t("admin.work.saveChanges") }}</v-btn>
 
-      <h3>Logo</h3>
+      <h3>{{ t("admin.work.logoTitle") }}</h3>
       <div class="logo__preview" v-if="resolveFileUrl(work?.logo_url)">
-        <img :src="resolveFileUrl(work.logo_url)" alt="logo firmy" />
-        <v-btn color="black" @click="removeLogo">Usuń logo</v-btn>
+        <img :src="resolveFileUrl(work.logo_url)" :alt="work.company_name" />
+        <v-btn color="black" @click="removeLogo">{{ t("admin.work.removeLogo") }}</v-btn>
       </div>
       <UploadFile
         accept="image/*"
-        label="Załaduj logo!"
-        buttonLabel="Zaktualizuj logo"
+        :label="t('admin.work.uploadLogo')"
+        :buttonLabel="t('admin.work.updateLogo')"
         @upload="uploadLogo"
       ></UploadFile>
 
-      <h3>Stanowiska ({{ language.toUpperCase() }})</h3>
+      <h3>{{ t("admin.work.positionsTitle", { lang: language.toUpperCase() }) }}</h3>
       <ul class="items__list">
         <li class="item" v-for="item in itemsForm" :key="item.id">
           <v-text-field
             bg-color="white"
-            :label="`Stanowisko (${language.toUpperCase()})`"
+            :label="t('admin.work.position', { lang: language.toUpperCase() })"
             v-model="item.title"
           ></v-text-field>
           <v-select
             bg-color="white"
-            label="Rodzaj zatrudnienia"
+            :label="t('admin.work.employmentType')"
             clearable
-            :items="EMPLOYMENT_TYPE_OPTIONS"
+            :items="employmentTypeOptions"
             v-model="item.employment_type"
           ></v-select>
           <v-text-field
             bg-color="white"
-            :label="`Lokalizacja (${language.toUpperCase()})`"
+            :label="t('admin.work.location', { lang: language.toUpperCase() })"
             v-model="item.location"
           ></v-text-field>
           <div class="dates">
             <v-text-field
               type="date"
               bg-color="white"
-              label="Od"
+              :label="t('admin.work.dateFrom')"
               class="input__info"
               v-model="item.date_from"
             ></v-text-field>
             <v-text-field
               type="date"
               bg-color="white"
-              label="Do"
+              :label="t('admin.work.dateTo')"
               class="input__info"
               v-model="item.date_to"
             ></v-text-field>
           </div>
           <v-textarea
             variant="filled"
-            :label="`Opis (${language.toUpperCase()})`"
+            :label="t('admin.work.description', { lang: language.toUpperCase() })"
             auto-grow
             bg-color="white"
             v-model="item.body_markdown"
           ></v-textarea>
           <v-text-field
             bg-color="white"
-            label="Umiejętności (oddzielone przecinkiem)"
+            :label="t('admin.work.skills')"
             v-model="item.skills"
           ></v-text-field>
           <div class="item__actions">
-            <v-btn color="blue" @click="updateItem(item)">Zapisz stanowisko</v-btn>
-            <v-btn color="black" @click="deleteItem(item.id)">Usuń stanowisko</v-btn>
+            <v-btn color="blue" @click="updateItem(item)">{{ t("admin.work.saveItem") }}</v-btn>
+            <v-btn color="black" @click="deleteItem(item.id)">{{ t("admin.work.deleteItem") }}</v-btn>
           </div>
         </li>
       </ul>
 
-      <h3>Dodaj stanowisko</h3>
+      <h3>{{ t("admin.work.addItemTitle") }}</h3>
       <div class="new__item">
         <v-text-field
           bg-color="white"
-          label="Stanowisko (PL)"
+          :label="t('admin.work.positionPl')"
           v-model="newItem.title_pl"
         ></v-text-field>
         <v-text-field
           bg-color="white"
-          label="Stanowisko (EN)"
+          :label="t('admin.work.positionEn')"
           v-model="newItem.title_en"
         ></v-text-field>
         <v-select
           bg-color="white"
-          label="Rodzaj zatrudnienia"
+          :label="t('admin.work.employmentType')"
           clearable
-          :items="EMPLOYMENT_TYPE_OPTIONS"
+          :items="employmentTypeOptions"
           v-model="newItem.employment_type"
         ></v-select>
         <v-text-field
           bg-color="white"
-          label="Lokalizacja (PL)"
+          :label="t('admin.work.locationPl')"
           v-model="newItem.location_pl"
         ></v-text-field>
         <v-text-field
           bg-color="white"
-          label="Lokalizacja (EN)"
+          :label="t('admin.work.locationEn')"
           v-model="newItem.location_en"
         ></v-text-field>
         <div class="dates">
           <v-text-field
             type="date"
             bg-color="white"
-            label="Od"
+            :label="t('admin.work.dateFrom')"
             class="input__info"
             v-model="newItem.date_from"
           ></v-text-field>
           <v-text-field
             type="date"
             bg-color="white"
-            label="Do"
+            :label="t('admin.work.dateTo')"
             class="input__info"
             v-model="newItem.date_to"
           ></v-text-field>
         </div>
         <v-textarea
           variant="filled"
-          label="Opis (PL)"
+          :label="t('admin.work.descriptionPl')"
           auto-grow
           bg-color="white"
           v-model="newItem.body_markdown_pl"
         ></v-textarea>
         <v-textarea
           variant="filled"
-          label="Opis (EN)"
+          :label="t('admin.work.descriptionEn')"
           auto-grow
           bg-color="white"
           v-model="newItem.body_markdown_en"
         ></v-textarea>
         <v-text-field
           bg-color="white"
-          label="Umiejętności (oddzielone przecinkiem)"
+          :label="t('admin.work.skills')"
           v-model="newItem.skills"
         ></v-text-field>
         <v-btn color="green" @click="addItem" :disabled="!canAddItem">
-          Dodaj stanowisko
+          {{ t("admin.work.addItem") }}
         </v-btn>
       </div>
     </form>
@@ -169,17 +169,11 @@
 <script>
 import { computed, reactive, watch } from "vue";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 import { resolveFileUrl } from "../../utils/url";
 import UploadFile from "../util/UploadFile.vue";
 
-const EMPLOYMENT_TYPE_OPTIONS = [
-  { title: "Pełny etat", value: "full_time" },
-  { title: "Część etatu", value: "part_time" },
-  { title: "Kontrakt", value: "contract" },
-  { title: "B2B", value: "b2b" },
-  { title: "Staż", value: "internship" },
-  { title: "Wolontariat", value: "volunteer" },
-];
+const EMPLOYMENT_TYPE_VALUES = ["full_time", "part_time", "contract", "b2b", "internship", "volunteer"];
 
 const splitSkills = (value) =>
   value
@@ -211,6 +205,14 @@ export default {
   emits: ["close-edit-company"],
   setup(props, { emit }) {
     const store = useStore();
+    const { t } = useI18n();
+
+    const employmentTypeOptions = computed(() =>
+      EMPLOYMENT_TYPE_VALUES.map((value) => ({
+        value,
+        title: t(`work.employmentType.${value}`),
+      }))
+    );
 
     const work = computed(() =>
       store.getters["work/collection"].find((item) => item.id === props.id)
@@ -334,12 +336,13 @@ export default {
     };
 
     return {
+      t,
       work,
       form,
       itemsForm,
       newItem,
       canAddItem,
-      EMPLOYMENT_TYPE_OPTIONS,
+      employmentTypeOptions,
       closePanel,
       saveCompany,
       uploadLogo,

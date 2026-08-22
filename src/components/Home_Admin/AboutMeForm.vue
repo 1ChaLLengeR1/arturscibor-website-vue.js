@@ -1,7 +1,7 @@
 <template>
   <div class="aboutme__infomration__container">
     <form class="aboutme__information__box" @submit.prevent="save">
-      <h3>Informacje</h3>
+      <h3>{{ t("admin.aboutme.infoTitle") }}</h3>
       <div class="language__switch">
         <v-btn
           :color="language === 'pl' ? 'blue' : undefined"
@@ -18,49 +18,49 @@
       </div>
       <v-text-field
         bg-color="white"
-        label="Imię i nazwisko"
-        hint="Pole nie jest tłumaczone — wspólne dla obu języków"
+        :label="t('admin.aboutme.fullName')"
+        :hint="t('admin.aboutme.fullNameHint')"
         persistent-hint
         v-model="form.name"
       ></v-text-field>
       <v-text-field
         bg-color="white"
-        :label="`Stanowisko (${language.toUpperCase()})`"
+        :label="t('admin.aboutme.jobTitle', { lang: language.toUpperCase() })"
         v-model="form.job_title"
       ></v-text-field>
       <v-textarea
         variant="filled"
-        :label="`Opis (${language.toUpperCase()})`"
+        :label="t('admin.aboutme.description', { lang: language.toUpperCase() })"
         auto-grow
         bg-color="white"
         v-model="form.body_markdown"
       ></v-textarea>
-      <v-btn @click="save" color="blue"> Zaaktualizuj! </v-btn>
+      <v-btn @click="save" color="blue">{{ t("admin.aboutme.save") }}</v-btn>
 
-      <h3>Zdjęcia</h3>
+      <h3>{{ t("admin.aboutme.photosTitle") }}</h3>
       <ul class="show__files">
         <li class="item" v-for="img in aboutMe?.images ?? []" :key="img.file_id">
-          <a :href="resolveFileUrl(img.url)" target="_blank" alt="zdjecie">Podgląd zdjęcia</a>
-          <v-btn color="black" @click="detachImage(img.file_id)">Usuń</v-btn>
+          <a :href="resolveFileUrl(img.url)" target="_blank">{{ t("admin.aboutme.photoPreview") }}</a>
+          <v-btn color="black" @click="detachImage(img.file_id)">{{ t("admin.aboutme.delete") }}</v-btn>
         </li>
       </ul>
       <UploadFile
         accept="image/*"
-        label="Załaduj zdjęcie!"
-        buttonLabel="Dodaj zdjęcie"
+        :label="t('admin.aboutme.uploadPhoto')"
+        :buttonLabel="t('admin.aboutme.addPhoto')"
         @upload="uploadImage"
       ></UploadFile>
 
-      <h3>CV</h3>
+      <h3>{{ t("admin.aboutme.cvTitle") }}</h3>
       <ul class="show__files" v-if="cv?.url">
         <li class="item">
-          <a :href="resolveFileUrl(cv.url)" target="_blank" alt="cv">Podgląd aktualnego CV</a>
+          <a :href="resolveFileUrl(cv.url)" target="_blank">{{ t("admin.aboutme.cvPreview") }}</a>
         </li>
       </ul>
       <UploadFile
         accept="application/pdf"
-        label="Załaduj CV!"
-        buttonLabel="Zaktualizuj CV!"
+        :label="t('admin.aboutme.uploadCv')"
+        :buttonLabel="t('admin.aboutme.updateCv')"
         @upload="uploadCvFile"
       ></UploadFile>
     </form>
@@ -70,6 +70,7 @@
 <script>
 import { ref, computed, watch, reactive } from "vue";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 import { resolveFileUrl } from "../../utils/url";
 import UploadFile from "../util/UploadFile.vue";
 export default {
@@ -78,6 +79,7 @@ export default {
   },
   setup() {
     const store = useStore();
+    const { t } = useI18n();
     const language = ref("pl");
     const form = reactive({
       name: "",
@@ -126,6 +128,7 @@ export default {
     };
 
     return {
+      t,
       language,
       form,
       aboutMe,

@@ -50,5 +50,58 @@
       "internship": "Staż",
       "volunteer": "Wolontariat"
     }
+  },
+  "admin": {
+    "aboutme": {
+      "infoTitle": "Informacje",
+      "fullName": "Imię i nazwisko",
+      "fullNameHint": "Pole nie jest tłumaczone — wspólne dla obu języków",
+      "jobTitle": "Stanowisko ({lang})",
+      "description": "Opis ({lang})",
+      "save": "Zaaktualizuj!",
+      "photosTitle": "Zdjęcia",
+      "photoPreview": "Podgląd zdjęcia",
+      "delete": "Usuń",
+      "uploadPhoto": "Załaduj zdjęcie!",
+      "addPhoto": "Dodaj zdjęcie",
+      "cvTitle": "CV",
+      "cvPreview": "Podgląd aktualnego CV",
+      "uploadCv": "Załaduj CV!",
+      "updateCv": "Zaktualizuj CV!"
+    },
+    "work": {
+      "addCompanyTitle": "Dodaj firmę",
+      "companyName": "Nazwa firmy",
+      "displayOrder": "Kolejność wyświetlania",
+      "optional": "Opcjonalne",
+      "addCompany": "Dodaj firmę",
+      "positionsCount": "Stanowiska: {count}",
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "companyTitle": "Firma",
+      "saveChanges": "Zapisz zmiany",
+      "logoTitle": "Logo",
+      "removeLogo": "Usuń logo",
+      "uploadLogo": "Załaduj logo!",
+      "updateLogo": "Zaktualizuj logo",
+      "positionsTitle": "Stanowiska ({lang})",
+      "position": "Stanowisko ({lang})",
+      "employmentType": "Rodzaj zatrudnienia",
+      "location": "Lokalizacja ({lang})",
+      "dateFrom": "Od",
+      "dateTo": "Do",
+      "description": "Opis ({lang})",
+      "skills": "Umiejętności (oddzielone przecinkiem)",
+      "saveItem": "Zapisz stanowisko",
+      "deleteItem": "Usuń stanowisko",
+      "addItemTitle": "Dodaj stanowisko",
+      "addItem": "Dodaj stanowisko",
+      "positionPl": "Stanowisko (PL)",
+      "positionEn": "Stanowisko (EN)",
+      "locationPl": "Lokalizacja (PL)",
+      "locationEn": "Lokalizacja (EN)",
+      "descriptionPl": "Opis (PL)",
+      "descriptionEn": "Opis (EN)"
+    }
   }
 }

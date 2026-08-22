@@ -5,15 +5,15 @@
         v-if="resolveFileUrl(company.logo_url)"
         class="logo"
         :src="resolveFileUrl(company.logo_url)"
-        alt="logo firmy"
+        :alt="company.company_name"
       />
       <div class="info">
         <p class="name">{{ company.company_name }}</p>
-        <p class="items__count">{{ company.items.length }} stanowisk</p>
+        <p class="items__count">{{ t("admin.work.positionsCount", { count: company.items.length }) }}</p>
       </div>
       <div class="icons">
-        <v-btn color="blue" @click="showEditCompany(company.id)">Edytuj</v-btn>
-        <v-btn color="black" @click="deleteCompany(company.id)">Usuń</v-btn>
+        <v-btn color="blue" @click="showEditCompany(company.id)">{{ t("admin.work.edit") }}</v-btn>
+        <v-btn color="black" @click="deleteCompany(company.id)">{{ t("admin.work.delete") }}</v-btn>
       </div>
     </li>
   </ul>
@@ -22,12 +22,14 @@
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 import { resolveFileUrl } from "../../utils/url";
 
 export default {
   emits: ["show-edit-company"],
   setup(_, { emit }) {
     const store = useStore();
+    const { t } = useI18n();
 
     const collection = computed(() => store.getters["work/collection"]);
 
@@ -39,7 +41,7 @@ export default {
       store.dispatch("work/apiDeleteWork", workId);
     };
 
-    return { collection, showEditCompany, deleteCompany, resolveFileUrl };
+    return { t, collection, showEditCompany, deleteCompany, resolveFileUrl };
   },
 };
 </script>

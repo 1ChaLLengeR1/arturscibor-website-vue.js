@@ -1,22 +1,22 @@
 <template>
   <div class="add__company__container">
     <form class="add__company__box" @submit.prevent="addCompany">
-      <h3>Dodaj firmę</h3>
+      <h3>{{ t("admin.work.addCompanyTitle") }}</h3>
       <v-text-field
         bg-color="white"
-        label="Nazwa firmy"
+        :label="t('admin.work.companyName')"
         v-model="form.company_name"
       ></v-text-field>
       <v-text-field
         type="number"
         bg-color="white"
-        label="Kolejność wyświetlania"
-        hint="Opcjonalne"
+        :label="t('admin.work.displayOrder')"
+        :hint="t('admin.work.optional')"
         persistent-hint
         v-model="form.numeric"
       ></v-text-field>
       <v-btn @click="addCompany" :disabled="form.company_name.trim() === ''" color="blue">
-        Dodaj firmę
+        {{ t("admin.work.addCompany") }}
       </v-btn>
     </form>
   </div>
@@ -25,10 +25,12 @@
 <script>
 import { reactive } from "vue";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 
 export default {
   setup() {
     const store = useStore();
+    const { t } = useI18n();
     const form = reactive({
       company_name: "",
       numeric: null,
@@ -44,7 +46,7 @@ export default {
       form.numeric = null;
     };
 
-    return { form, addCompany };
+    return { t, form, addCompany };
   },
 };
 </script>
