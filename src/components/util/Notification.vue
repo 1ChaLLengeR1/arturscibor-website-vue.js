@@ -81,7 +81,8 @@ export default {
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
-  background-color: white;
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
   border-radius: 4px;
   padding: 0.5rem 0.75rem;
 

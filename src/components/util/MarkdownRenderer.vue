@@ -85,7 +85,7 @@ export default {
   }
 
   :deep(code) {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--overlay-color);
     padding: 0.1rem 0.35rem;
     border-radius: 4px;
     font-size: 0.9em;
@@ -105,7 +105,7 @@ export default {
 
   :deep(hr) {
     border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid var(--overlay-color);
     margin: 1rem 0;
   }
 

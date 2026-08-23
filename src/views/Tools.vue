@@ -174,7 +174,7 @@ export default {
       }
       :deep(.markdown-renderer) {
         font-size: 17px;
-        color: white;
+        color: var(--text-color);
         text-align: center;
       }
       .box__progress {
@@ -192,7 +192,7 @@ export default {
         p {
           font-size: 15px;
           font-weight: bold;
-          color: white;
+          color: var(--text-color);
         }
 
         .level__label {
@@ -235,7 +235,7 @@ export default {
   }
   :deep(.markdown-renderer) {
     font-size: 17px;
-    color: white;
+    color: var(--text-color);
     text-align: left;
   }
   .box__progress {
@@ -252,7 +252,7 @@ export default {
     p {
       font-size: 15px;
       font-weight: bold;
-      color: white;
+      color: var(--text-color);
     }
     .level__label {
       color: var(--main-color);
@@ -266,7 +266,7 @@ export default {
     width: 100%;
     display: block;
     padding: 0.8rem;
-    color: var(--secend-bg-color);
+    color: var(--card-text-color);
     box-shadow: 0 0 0.5rem var(--main-color);
     background: var(--main-color);
     border-radius: 8px;

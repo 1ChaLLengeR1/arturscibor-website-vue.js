@@ -63,8 +63,8 @@ export default {
     display: flex;
     align-items: center;
     gap: 1rem;
-    background-color: white;
-    color: black;
+    background-color: var(--card-bg-color);
+    color: var(--card-text-color);
     padding: 0.5rem;
     border-radius: 8px;
     box-shadow: 0px 0px 10px 2px rgb(71, 71, 71);
@@ -94,6 +94,35 @@ export default {
 @media (min-width: 750px) {
   .list__projects__container {
     width: 70%;
+  }
+}
+
+@media (max-width: 400px) {
+  .list__projects__container {
+    .item {
+      padding: 0.4rem;
+      gap: 0.5rem;
+
+      .thumb {
+        width: 2rem;
+        height: 2rem;
+      }
+
+      .info .name {
+        font-size: 0.85rem;
+      }
+
+      .icons {
+        gap: 0.35rem;
+
+        :deep(.v-btn) {
+          min-width: 0;
+          padding: 0 0.5rem;
+          font-size: 0.6rem;
+          height: 1.8rem;
+        }
+      }
+    }
   }
 }
 </style>

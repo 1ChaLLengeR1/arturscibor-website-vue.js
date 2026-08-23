@@ -135,10 +135,10 @@ export default {
       padding: 0.5rem;
       font-size: 12px;
       color: var(--text-color);
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: var(--overlay-color);
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      border-bottom: 1px solid var(--overlay-color);
 
       .login__password {
         width: 100%;

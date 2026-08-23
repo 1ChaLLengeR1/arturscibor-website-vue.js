@@ -71,11 +71,11 @@ main {
   align-items: center;
   padding: 1rem;
   overflow: auto;
-  background: rgb(31, 36, 45);
+  background: var(--bg-color);
   background: linear-gradient(
     90deg,
-    rgba(31, 36, 45, 1) 0%,
-    rgba(50, 57, 70, 1) 100%
+    var(--bg-color) 0%,
+    var(--secend-bg-color) 100%
   );
   .main__box {
     min-width: 100%;
@@ -99,7 +99,7 @@ main {
       padding: 0;
       font-size: 7rem;
       font-weight: bold;
-      color: white;
+      color: var(--text-color);
       @media (min-width: 750px) {
         font-size: 20rem;
         line-height: 16rem;
@@ -111,7 +111,8 @@ main {
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: white;
+      background-color: var(--card-bg-color);
+      color: var(--card-text-color);
       @media (min-width: 750px) {
         width: 25rem;
       }
@@ -139,7 +140,7 @@ main {
         margin: 0;
         font-size: 1rem;
         font-weight: bold;
-        color: white;
+        color: var(--text-color);
         @media (min-width: 750px) {
           font-size: 1.3rem;
         }

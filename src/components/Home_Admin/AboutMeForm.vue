@@ -181,10 +181,10 @@ export default {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        background-color: white;
+        background-color: var(--card-bg-color);
         border-radius: 4px;
         padding: 0.3rem;
-        color: black;
+        color: var(--card-text-color);
         font-weight: bold;
 
         a {
@@ -196,7 +196,7 @@ export default {
     h3 {
       width: 100%;
       font-size: 2rem;
-      color: white;
+      color: var(--text-color);
       text-align: center;
     }
   }

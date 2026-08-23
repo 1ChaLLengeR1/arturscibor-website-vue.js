@@ -41,7 +41,10 @@
     "signin": "Sign in",
     "logout": "Log out!",
     "navigationPanel": "Navigation Panel",
-    "adminPanel": "Admin Panel"
+    "adminPanel": "Admin Panel",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeAuto": "Auto"
   },
   "tools": {
     "progressLabel": "Skill level",

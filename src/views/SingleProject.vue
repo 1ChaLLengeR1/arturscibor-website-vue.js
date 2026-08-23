@@ -121,7 +121,7 @@ export default {
       display: block;
       padding: 0.6rem;
       text-align: center;
-      color: var(--secend-bg-color);
+      color: var(--card-text-color);
       background: var(--main-color);
       border-radius: 8px;
       font-weight: 600;

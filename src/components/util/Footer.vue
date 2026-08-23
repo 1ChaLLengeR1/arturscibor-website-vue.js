@@ -24,9 +24,9 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
-  background-color: var(-bg-color);
-  color: white;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   text-align: center;
-  border-top: 2px solid white;;
+  border-top: 2px solid var(--text-color);
 }
 </style>

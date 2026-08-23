@@ -52,7 +52,7 @@ header {
   background: var(--bg-color);
 
   h3 {
-    color: white;
+    color: var(--text-color);
     font-size: 0.75rem;
   }
 

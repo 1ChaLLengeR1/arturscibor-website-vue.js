@@ -21,6 +21,7 @@
         >
       </nav>
       <LanguageSwitcher></LanguageSwitcher>
+      <ThemeSwitcher></ThemeSwitcher>
       <ToggleButton
         v-if="!mobile"
         name="default"
@@ -36,6 +37,7 @@ import Logo from "./Logo.vue";
 import ToggleButton from "../ToggleButton.vue";
 import SlideBarDefault from "./SlideBar.vue";
 import LanguageSwitcher from "../../util/LanguageSwitcher.vue";
+import ThemeSwitcher from "../../util/ThemeSwitcher.vue";
 import ArrayDefoultLinks from "../../JS/ArrayLinksDefoult";
 import { ref, reactive  } from "vue";
 import { useI18n } from "vue-i18n";
@@ -45,6 +47,7 @@ export default {
     ToggleButton,
     SlideBarDefault,
     LanguageSwitcher,
+    ThemeSwitcher,
   },
   setup() {
     const { t } = useI18n();
@@ -108,6 +111,12 @@ header {
     display: flex;
     align-items: center;
     gap: 1.5rem;
+  }
+
+  @media (max-width: 400px) {
+    .right__side {
+      gap: 0.5rem;
+    }
   }
 
   .navbar {

@@ -41,7 +41,10 @@
     "signin": "Zaloguj się",
     "logout": "Wyloguj się!",
     "navigationPanel": "Panel Nawigacyjny",
-    "adminPanel": "Panel Administratora"
+    "adminPanel": "Panel Administratora",
+    "themeLight": "Jasny",
+    "themeDark": "Ciemny",
+    "themeAuto": "Auto"
   },
   "tools": {
     "progressLabel": "Poziom umiejętności",

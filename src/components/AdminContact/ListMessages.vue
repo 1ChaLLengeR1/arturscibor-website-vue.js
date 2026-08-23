@@ -55,7 +55,7 @@ export default {
   .empty {
     width: 100%;
     text-align: center;
-    color: white;
+    color: var(--text-color);
     opacity: 0.7;
     padding: 1rem;
   }
@@ -65,8 +65,8 @@ export default {
     display: flex;
     align-items: center;
     gap: 1rem;
-    background-color: white;
-    color: black;
+    background-color: var(--card-bg-color);
+    color: var(--card-text-color);
     padding: 0.5rem;
     border-radius: 8px;
     box-shadow: 0px 0px 10px 2px rgb(71, 71, 71);
@@ -112,6 +112,40 @@ export default {
 @media (min-width: 750px) {
   .list__messages__container {
     width: 70%;
+  }
+}
+
+@media (max-width: 400px) {
+  .list__messages__container {
+    .item {
+      padding: 0.4rem;
+      gap: 0.5rem;
+
+      .badge {
+        font-size: 0.6rem;
+        padding: 0.15rem 0.4rem;
+      }
+
+      .info {
+        .name {
+          font-size: 0.85rem;
+        }
+        .subject {
+          font-size: 0.7rem;
+        }
+      }
+
+      .icons {
+        gap: 0.35rem;
+
+        :deep(.v-btn) {
+          min-width: 0;
+          padding: 0 0.5rem;
+          font-size: 0.6rem;
+          height: 1.8rem;
+        }
+      }
+    }
   }
 }
 </style>

@@ -72,13 +72,13 @@ export default {
   }
   .level {
     font-size: 0.85rem;
-    color: white;
+    color: var(--text-color);
     opacity: 0.7;
   }
   .short__description {
     flex: 1;
     font-size: 0.95rem;
-    color: white;
+    color: var(--text-color);
     text-align: center;
     overflow: hidden;
     display: -webkit-box;
@@ -99,7 +99,7 @@ export default {
     display: block;
     padding: 0.6rem;
     text-align: center;
-    color: var(--secend-bg-color);
+    color: var(--card-text-color);
     background: var(--main-color);
     border-radius: 8px;
     letter-spacing: 0.05rem;

@@ -2,6 +2,7 @@
   <div class="admin__slidebar">
     <div class="slidebar__top">
       <LanguageSwitcher></LanguageSwitcher>
+      <ThemeSwitcher></ThemeSwitcher>
     </div>
 
     <div class="tabs">
@@ -38,6 +39,7 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import LanguageSwitcher from "../../util/LanguageSwitcher.vue";
+import ThemeSwitcher from "../../util/ThemeSwitcher.vue";
 import ArrayLinksDefoult from "../../JS/ArrayLinksDefoult";
 import ArrayLinksAdmin from "../../JS/ArrayLinksAdmin";
 
@@ -49,6 +51,7 @@ const TABS = [
 export default {
   components: {
     LanguageSwitcher,
+    ThemeSwitcher,
   },
   emits: ["close"],
   setup(_, { emit }) {
@@ -94,11 +97,12 @@ export default {
   .slidebar__top {
     display: flex;
     justify-content: flex-end;
+    gap: 0.5rem;
   }
 
   .tabs {
     display: flex;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid var(--overlay-color);
 
     .tab {
       background: transparent;

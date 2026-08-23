@@ -23,9 +23,9 @@
 <script>
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
-import Header from "./components/Header/default__navigation/Nav.vue";
+import Header from "./components/Header/Default/Nav.vue";
 import Footer from "./components/util/Footer.vue";
-import AdminHeader from "./components/Header/admin__navigation/Nav.vue";
+import AdminHeader from "./components/Header/Admin/Nav.vue";
 import LoadingSpinner from "./components/util/LoadingSpinner.vue";
 import Notification from "./components/util/Notification.vue";
 import ConfirmDialog from "./components/util/ConfirmDialog.vue";
@@ -71,6 +71,32 @@ export default {
   --secend-bg-color: #323946;
   --text-color: #fff;
   --main-color: #0ef;
+  --card-bg-color: #fff;
+  --card-text-color: #000;
+  --overlay-color: rgba(255, 255, 255, 0.08);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg-color: #f4f5f7;
+    --secend-bg-color: #e6e8ec;
+    --text-color: #1f242d;
+    --overlay-color: rgba(0, 0, 0, 0.06);
+  }
+}
+
+:root[data-theme="light"] {
+  --bg-color: #f4f5f7;
+  --secend-bg-color: #e6e8ec;
+  --text-color: #1f242d;
+  --overlay-color: rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="dark"] {
+  --bg-color: #1f242d;
+  --secend-bg-color: #323946;
+  --text-color: #fff;
+  --overlay-color: rgba(255, 255, 255, 0.08);
 }
 
 .app__container {

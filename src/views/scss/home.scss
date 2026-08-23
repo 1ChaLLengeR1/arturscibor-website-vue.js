@@ -15,7 +15,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
+    color: var(--text-color);
     padding: 0.5rem;
     overflow: hidden;
   }
@@ -47,7 +47,7 @@
   .grid-markdown {
     grid-area: markdown;
     width: 100%;
-    color: white;
+    color: var(--text-color);
     font-size: 1.3rem;
     padding: 0.5rem;
     animation: slideRight 1s ease forwards;
@@ -74,7 +74,7 @@
     margin-bottom: 2rem;
     display: flex;
     padding: 1rem 2.8rem;
-    color: var(--secend-bg-color);
+    color: var(--card-text-color);
     box-shadow: 0 0 0.5rem var(--main-color);
     background: var(--main-color);
     letter-spacing: 0.1rem;

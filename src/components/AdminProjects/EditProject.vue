@@ -225,7 +225,7 @@ export default {
     svg {
       width: 2rem;
       height: 2rem;
-      fill: white;
+      fill: var(--text-color);
       cursor: pointer;
     }
   }
@@ -239,7 +239,7 @@ export default {
     h3 {
       width: 100%;
       font-size: 2rem;
-      color: white;
+      color: var(--text-color);
       text-align: center;
     }
 

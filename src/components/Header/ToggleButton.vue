@@ -41,7 +41,7 @@ import {ref, watch, toRefs} from 'vue'
         svg{
             width: 100%;
             height: 100%;
-            fill: white;
+            fill: var(--text-color);
             transition: 0.5s ease-in-out;
         }
 
