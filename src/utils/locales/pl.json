@@ -64,6 +64,8 @@
     "github": "Kod źródłowy",
     "live": "Zobacz na żywo",
     "completedAt": "Ukończono",
+    "startedAt": "Rozpoczęto",
+    "supportBadge": "W ciągłym wsparciu",
     "backLink": "Wróć do projektów",
     "level": {
       "beginner": "Początkujący",
@@ -207,6 +209,8 @@
       "githubUrl": "Link do GitHub",
       "liveUrl": "Link do wersji live",
       "completedAt": "Data ukończenia",
+      "startedAt": "Data rozpoczęcia",
+      "isSupport": "Nadal wspierany/monitorowany",
       "displayOrder": "Kolejność wyświetlania",
       "optional": "Opcjonalne",
       "addProject": "Dodaj projekt",

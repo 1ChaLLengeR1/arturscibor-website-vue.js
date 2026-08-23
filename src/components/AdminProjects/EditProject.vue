@@ -60,6 +60,16 @@
         v-model="form.completed_at"
       ></v-text-field>
       <v-text-field
+        type="date"
+        bg-color="white"
+        :label="t('admin.projects.startedAt')"
+        v-model="form.started_at"
+      ></v-text-field>
+      <v-checkbox
+        :label="t('admin.projects.isSupport')"
+        v-model="form.is_support"
+      ></v-checkbox>
+      <v-text-field
         type="number"
         bg-color="white"
         :label="t('admin.projects.displayOrder')"
@@ -137,6 +147,8 @@ export default {
       github_url: "",
       live_url: "",
       completed_at: "",
+      started_at: "",
+      is_support: false,
       numeric: null,
     });
 
@@ -152,6 +164,8 @@ export default {
         form.github_url = newVal.github_url ?? "";
         form.live_url = newVal.live_url ?? "";
         form.completed_at = newVal.completed_at ?? "";
+        form.started_at = newVal.started_at ?? "";
+        form.is_support = newVal.is_support ?? false;
         form.numeric = newVal.numeric;
       },
       { immediate: true }
@@ -176,6 +190,8 @@ export default {
           github_url: form.github_url.trim() === "" ? null : form.github_url.trim(),
           live_url: form.live_url.trim() === "" ? null : form.live_url.trim(),
           completed_at: form.completed_at || null,
+          started_at: form.started_at || null,
+          is_support: form.is_support,
           numeric: form.numeric === null || form.numeric === "" ? null : Number(form.numeric),
         },
       });

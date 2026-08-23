@@ -64,6 +64,8 @@
     "github": "Source code",
     "live": "Live demo",
     "completedAt": "Completed",
+    "startedAt": "Started",
+    "supportBadge": "Actively supported",
     "backLink": "Back to projects",
     "level": {
       "beginner": "Beginner",
@@ -207,6 +209,8 @@
       "githubUrl": "GitHub link",
       "liveUrl": "Live link",
       "completedAt": "Completion date",
+      "startedAt": "Start date",
+      "isSupport": "Still supported/monitored",
       "displayOrder": "Display order",
       "optional": "Optional",
       "addProject": "Add project",
