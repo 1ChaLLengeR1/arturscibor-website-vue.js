@@ -27,9 +27,6 @@
     "titleShort": "Panel dla Administratora!",
     "login": "Login",
     "password": "Hasło",
-    "testModeTitle": "Tryb testowy — zobacz!",
-    "testLogin": "Login:",
-    "testPassword": "Hasło:",
     "submit": "Zaloguj się"
   },
   "nav": {
@@ -65,6 +62,8 @@
     "live": "Zobacz na żywo",
     "completedAt": "Ukończono",
     "startedAt": "Rozpoczęto",
+    "duration": "Czas trwania: {duration}",
+    "durationOngoing": "W trakcie: {duration}",
     "supportBadge": "W ciągłym wsparciu",
     "backLink": "Wróć do projektów",
     "level": {

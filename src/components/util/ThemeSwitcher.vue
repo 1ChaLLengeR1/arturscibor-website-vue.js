@@ -6,7 +6,7 @@
     @change="setThemePreference($event.target.value)"
   >
     <option v-for="opt in THEME_OPTIONS" :key="opt.value" :value="opt.value">
-      {{ opt.icon }} {{ t(opt.labelKey) }}
+      {{ t(opt.labelKey) }}
     </option>
   </select>
 </template>
@@ -16,9 +16,9 @@ import { useI18n } from "vue-i18n";
 import { themePreference, setThemePreference } from "../../utils/theme";
 
 const THEME_OPTIONS = [
-  { value: "light", icon: "☀️", labelKey: "nav.themeLight" },
-  { value: "dark", icon: "🌙", labelKey: "nav.themeDark" },
-  { value: "auto", icon: "🖥️", labelKey: "nav.themeAuto" },
+  { value: "light", labelKey: "nav.themeLight" },
+  { value: "dark", labelKey: "nav.themeDark" },
+  { value: "auto", labelKey: "nav.themeAuto" },
 ];
 
 export default {

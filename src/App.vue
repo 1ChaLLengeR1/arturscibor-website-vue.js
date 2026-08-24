@@ -66,11 +66,28 @@ export default {
   outline: none;
 }
 
+html {
+  scrollbar-color: var(--main-color) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: 10px;
+}
+
 :root {
   --bg-color: #1f242d;
   --secend-bg-color: #323946;
   --text-color: #fff;
-  --main-color: #0ef;
+  --main-color: #3eaff7;
   --card-bg-color: #fff;
   --card-text-color: #000;
   --overlay-color: rgba(255, 255, 255, 0.08);

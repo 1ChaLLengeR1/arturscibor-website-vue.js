@@ -27,9 +27,6 @@
     "titleShort": "Admin panel!",
     "login": "Login",
     "password": "Password",
-    "testModeTitle": "Test mode — check it out!",
-    "testLogin": "Login:",
-    "testPassword": "Password:",
     "submit": "Sign in"
   },
   "nav": {
@@ -65,6 +62,8 @@
     "live": "Live demo",
     "completedAt": "Completed",
     "startedAt": "Started",
+    "duration": "Duration: {duration}",
+    "durationOngoing": "Ongoing: {duration}",
     "supportBadge": "Actively supported",
     "backLink": "Back to projects",
     "level": {

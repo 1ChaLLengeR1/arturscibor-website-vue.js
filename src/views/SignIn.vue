@@ -22,18 +22,11 @@
                 type="password"
                 v-model="password"
               ></v-text-field>
-              <div class="login__password__false">
-                <p>{{ t("signin.testModeTitle") }}</p>
-                <div class="login__password">
-                  <p>{{ t("signin.testLogin") }} <span>test</span></p>
-                  <p>{{ t("signin.testPassword") }} <span>test</span></p>
-                </div>
-              </div>
             </v-form>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn :disabled="checkInputs" color="blue" @click.prevent="signIn">
+            <v-btn :disabled="checkInputs" color="var(--main-color)" @click.prevent="signIn">
               {{ t("signin.submit") }}
             </v-btn>
           </v-card-actions>
@@ -128,28 +121,6 @@ export default {
       }
     }
 
-    .login__password__false {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      padding: 0.5rem;
-      font-size: 12px;
-      color: var(--text-color);
-      background-color: var(--overlay-color);
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      border-bottom: 1px solid var(--overlay-color);
-
-      .login__password {
-        width: 100%;
-        display: flex;
-        gap: 1rem;
-        span {
-          font-weight: bold;
-          color: var(--main-color);
-        }
-      }
-    }
     @keyframes showForm {
       0% {
         opacity: 0;
@@ -163,11 +134,6 @@ export default {
   @media (min-width: 1000px) {
     .box__signin {
       width: 50%;
-      .login__password__false {
-        p {
-          font-size: 18px;
-        }
-      }
     }
   }
 }
