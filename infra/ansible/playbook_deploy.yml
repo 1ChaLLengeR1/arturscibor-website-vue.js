@@ -6,7 +6,7 @@
     - secrets.yml
   vars:
     # Haslo sudo z secrets.yml; pusty string = sudo NOPASSWD na serwerze
-    ansible_become_password: "{{ sudo_password | default('') }}"
+    ansible_become_password: "{{ become_password | default('') }}"
     deploy_dir: /var/www/arturscibor/arturscibor-website-vue.js
     repo_https_url: "https://{{ git_pat }}@github.com/1ChaLLengeR1/arturscibor-website-vue.js.git"
     repo_public_url: "https://github.com/1ChaLLengeR1/arturscibor-website-vue.js.git"
