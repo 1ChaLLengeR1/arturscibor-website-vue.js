@@ -1,0 +1,29 @@
+---
+- name: Deploy arturscibor-website frontend (Vue + nginx, Docker Swarm)
+  hosts: production
+  become: true
+  vars_files:
+    - secrets.yml
+  vars:
+    # Haslo sudo z secrets.yml; pusty string = sudo NOPASSWD na serwerze
+    ansible_become_password: "{{ become_password | default('') }}"
+    deploy_dir: /var/www/arturscibor/arturscibor-website-vue.js
+    repo_https_url: "https://{{ git_pat }}@github.com/1ChaLLengeR1/arturscibor-website-vue.js.git"
+    repo_public_url: "https://github.com/1ChaLLengeR1/arturscibor-website-vue.js.git"
+    repo_branch: main
+    # stack "arturscibor_frontend" + serwis "frontend" -> serwis w Swarmie: arturscibor_frontend_frontend
+    stack_name: arturscibor_frontend
+    frontend_image: "{{ frontend_image_override | default('arturscibor/arturscibor_frontend:latest') }}"
+
+  tasks:
+    - name: Checkout repozytorium
+      import_tasks: tasks/checkout.yml
+
+    - name: Sieci overlay
+      import_tasks: tasks/networks.yml
+
+    - name: Deploy stacka
+      import_tasks: tasks/deploy.yml
+
+    - name: Sprzątanie
+      import_tasks: tasks/cleanup.yml

@@ -50,7 +50,7 @@
         }
         a:hover{
             background: var(--main-color);
-            fill: var(--secend-bg-color);
+            fill: var(--card-text-color);
             box-shadow: 0 0 1rem var(--main-color);
         }
        

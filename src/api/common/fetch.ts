@@ -1,8 +1,9 @@
 import store from "../../storage";
+import { url_backend } from "@/app";
 import type { ApiResult, GetRequestOptions } from "./types";
 
 function buildUrl(path: string, query?: GetRequestOptions["query"]): string {
-  const url = new URL(path, import.meta.env.VITE_API_URL);
+  const url = new URL(path, url_backend);
   if (query) {
     for (const [key, value] of Object.entries(query)) {
       if (value !== undefined && value !== null) {

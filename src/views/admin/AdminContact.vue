@@ -102,7 +102,7 @@ export default {
     svg {
       width: 1.5rem;
       height: 1.5rem;
-      fill: white;
+      fill: var(--text-color);
       cursor: pointer;
     }
   }
@@ -118,12 +118,12 @@ export default {
     gap: 0.35rem 1rem;
 
     dt {
-      color: white;
+      color: var(--text-color);
       opacity: 0.7;
       font-weight: bold;
     }
     dd {
-      color: white;
+      color: var(--text-color);
       margin: 0;
       word-break: break-word;
 
@@ -134,9 +134,9 @@ export default {
   }
 
   .description {
-    color: white;
+    color: var(--text-color);
     white-space: pre-wrap;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--overlay-color);
     border-radius: 8px;
     padding: 0.75rem;
   }

@@ -46,7 +46,7 @@ export default {
 
     h3 {
       font-size: 2rem;
-      color: white;
+      color: var(--text-color);
       text-align: left;
     }
 

@@ -1,3 +1,4 @@
+import { url_backend } from "@/app";
 import type { CvDownloadResult } from "./types";
 
 function errorResult(keyTypeError: string, message: string): CvDownloadResult {
@@ -24,7 +25,7 @@ function fileNameFromHeaders(headers: Headers): string | null {
 export async function getCv(): Promise<CvDownloadResult> {
   let response: Response | undefined;
   try {
-    const url = new URL("/api/v1/cv", import.meta.env.VITE_API_URL).toString();
+    const url = new URL("/api/v1/cv", url_backend).toString();
     response = await fetch(url, { method: "GET" });
 
     if (!response.ok) {

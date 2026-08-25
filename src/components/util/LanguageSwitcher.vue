@@ -1,17 +1,14 @@
 <template>
-  <div class="language__switcher">
-    <button
-      v-for="lang in languages"
-      :key="lang.code"
-      type="button"
-      class="language__button"
-      :class="{ active: locale === lang.code }"
-      :aria-label="lang.code"
-      @click="setLocale(lang.code)"
-    >
-      {{ lang.flag }}
-    </button>
-  </div>
+  <select
+    class="language__switcher"
+    :value="locale"
+    aria-label="language"
+    @change="setLocale($event.target.value)"
+  >
+    <option v-for="lang in languages" :key="lang.code" :value="lang.code">
+      {{ lang.flag }} {{ lang.code.toUpperCase() }}
+    </option>
+  </select>
 </template>
 
 <script>
@@ -55,26 +52,24 @@ export default {
 
 <style lang="scss" scoped>
 .language__switcher {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  background: var(--secend-bg-color);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
 
-  .language__button {
-    background: transparent;
-    font-size: 1.5rem;
-    line-height: 1;
-    padding: 0.25rem;
-    cursor: pointer;
-    opacity: 0.5;
-    transition: 0.3s ease;
+  option {
+    background: var(--secend-bg-color);
+    color: var(--text-color);
   }
+}
 
-  .language__button:hover {
-    opacity: 0.8;
-  }
-
-  .language__button.active {
-    opacity: 1;
+@media (max-width: 400px) {
+  .language__switcher {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.35rem;
   }
 }
 </style>

@@ -1,8 +1,9 @@
 import store from "../../storage";
+import { url_backend } from "@/app";
 import type { ApiResult, HttpMethod, WriteRequestOptions } from "./types";
 
 function buildUrl(path: string): string {
-  return new URL(path, import.meta.env.VITE_API_URL).toString();
+  return new URL(path, url_backend).toString();
 }
 
 function buildRequest(options: WriteRequestOptions): { headers: Headers; body?: BodyInit } {

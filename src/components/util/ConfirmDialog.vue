@@ -47,7 +47,7 @@ export default {
   background: var(--secend-bg-color);
 
   .message {
-    color: white;
+    color: var(--text-color);
     font-size: 1.1rem;
   }
 

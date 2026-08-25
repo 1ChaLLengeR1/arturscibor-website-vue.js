@@ -5,36 +5,31 @@
       <form @submit.prevent="sendMessage">
         <div class="inputs">
           <v-text-field
-            color="white"
-            bg-color="#323946"
+            bg-color="white"
             v-model="form.name"
             :label="t('contact.name')"
           ></v-text-field>
           <v-text-field
-            color="white"
-            bg-color="#323946"
+            bg-color="white"
             v-model="form.email"
             :label="t('contact.email')"
           ></v-text-field>
         </div>
         <div class="inputs">
           <v-text-field
-            color="white"
-            bg-color="#323946"
+            bg-color="white"
             v-model="form.subject"
             :label="t('contact.subject')"
           ></v-text-field>
           <v-text-field
-            color="white"
-            bg-color="#323946"
+            bg-color="white"
             v-model="form.phone"
             :label="t('contact.phone')"
           ></v-text-field>
         </div>
         <v-textarea
           rows="15"
-          color="white"
-          bg-color="#323946"
+          bg-color="white"
           v-model="form.description"
           :label="t('contact.description')"
         ></v-textarea>
@@ -140,7 +135,7 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
-          color: var(--secend-bg-color);
+          color: var(--card-text-color);
           box-shadow: 0 0 1rem var(--main-color);
           background: var(--main-color);
           letter-spacing: 0.1rem;

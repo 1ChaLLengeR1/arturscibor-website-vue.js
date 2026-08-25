@@ -48,7 +48,7 @@ export default {
   gap: 0.35rem;
 
   .current {
-    color: white;
+    color: var(--text-color);
     font-size: 0.9rem;
 
     strong {
@@ -58,7 +58,7 @@ export default {
 
   .scale {
     width: 100%;
-    color: white;
+    color: var(--text-color);
     font-size: 0.85rem;
 
     summary {
@@ -73,7 +73,7 @@ export default {
       list-style: none;
       margin-top: 0.5rem;
       padding: 0.5rem;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--overlay-color);
       border-radius: 8px;
 
       li {

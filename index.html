@@ -6,11 +6,23 @@
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Artur Ścibor</title>
+    <script>
+        (function () {
+            var KEY = "theme";
+            var stored = localStorage.getItem(KEY);
+            var pref = stored === "light" || stored === "dark" || stored === "auto" ? stored : "auto";
+            var effective =
+                pref === "auto"
+                    ? (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+                    : pref;
+            document.documentElement.setAttribute("data-theme", effective);
+        })();
+    </script>
 </head>
 
 <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/main.ts"></script>
 </body>
 
 </html>

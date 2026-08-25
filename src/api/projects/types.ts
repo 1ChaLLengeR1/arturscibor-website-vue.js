@@ -18,6 +18,8 @@ export interface ProjectResponseData {
   github_url: string | null;
   live_url: string | null;
   completed_at: string | null;
+  started_at: string | null;
+  is_support: boolean | null;
   numeric: number | null;
   images: ProjectImageData[];
   created_at: string;
@@ -33,6 +35,8 @@ export interface ProjectCreatePayload {
   github_url?: string | null;
   live_url?: string | null;
   completed_at?: string | null;
+  started_at?: string | null;
+  is_support?: boolean | null;
   numeric?: number | null;
 }
 
@@ -46,6 +50,8 @@ export interface ProjectUpdatePayload {
   github_url?: string | null;
   live_url?: string | null;
   completed_at?: string | null;
+  started_at?: string | null;
+  is_support?: boolean | null;
   numeric?: number | null;
 }
 

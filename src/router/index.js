@@ -103,7 +103,21 @@ const router = createRouter({
   linkExactActiveClass: "exact-active-link",
 });
 
-router.beforeEach((to, from, next) => {
+// Sesja jest w Vuex (resetuje się przy każdym odświeżeniu strony), ale localStorage
+// pamięta zalogowanego użytkownika - trzeba ją przywrócić raz, zanim ta strażniczka
+// oceni pierwszą nawigację, inaczej po odświeżeniu na dowolnej stronie (nie tylko
+// /signin) admin wygląda jak wylogowany, dopóki nie trafi ręcznie na /signin.
+let sessionRestored = null;
+function ensureSessionRestored() {
+  if (!sessionRestored) {
+    sessionRestored = store.dispatch("auth/apiRestoreSession");
+  }
+  return sessionRestored;
+}
+
+router.beforeEach(async (to, from, next) => {
+  await ensureSessionRestored();
+
   const options = store.getters["auth/optionsTokens"];
 
   if (

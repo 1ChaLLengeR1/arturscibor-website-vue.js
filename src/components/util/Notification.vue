@@ -71,32 +71,37 @@ export default {
 
 <style lang="scss" scoped>
 .notification__container {
-  width: 100%;
-  min-height: 4rem;
+  min-height: 3.5rem;
   position: fixed;
-  top: 5rem;
+  top: calc(5rem + 0.5rem);
+  left: 0.5rem;
+  right: 0.5rem;
   z-index: 120;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  gap: 0.5rem;
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
   border-radius: 4px;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
 
   @media (min-width: 425px){
+    left: auto;
     width: 25rem;
     right: 1rem;
   }
 
   .notification__box {
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    min-width: 0;
 
     svg {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 2rem;
+      height: 2rem;
+      flex-shrink: 0;
     }
     .error {
       fill: red;
@@ -107,12 +112,15 @@ export default {
 
     span {
       font-weight: bold;
+      font-size: 0.9rem;
+      overflow-wrap: break-word;
     }
   }
 
   svg {
     width: 1.5rem;
     height: 1.5rem;
+    flex-shrink: 0;
     cursor: pointer;
   }
 }
