@@ -1,9 +1,9 @@
 ---
-# Traefika stawia stack backendu (arturscibor-server-FastAPI); tu tylko
-# upewniamy się, że sieć overlay istnieje, zanim podepniemy pod nią stack frontendu.
-- name: Utwórz sieć overlay backend_network_traefik (idempotentnie)
+# Traefik już działa na VPS (osobny stack); tu tylko upewniamy się, że sieć
+# overlay istnieje, zanim podepniemy pod nią stack frontendu.
+- name: Utwórz sieć overlay traefik-public (idempotentnie)
   ansible.builtin.command:
-    cmd: docker network create --driver overlay --attachable backend_network_traefik
+    cmd: docker network create --driver overlay --attachable traefik-public
   register: network_result
   failed_when: network_result.rc != 0 and 'already exists' not in network_result.stderr
   changed_when: network_result.rc == 0
