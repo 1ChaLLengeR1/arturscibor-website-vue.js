@@ -1,0 +1,14 @@
+services:
+  frontend:
+    build:
+      context: ../../..
+      dockerfile: infra/dockerfiles/dockerfile/production.dockerfile
+    ports:
+      - "2000:80"
+    restart: always
+    networks:
+      - arturscibor_frontend
+
+networks:
+  arturscibor_frontend:
+    driver: bridge

@@ -14,11 +14,6 @@ dist-ssr
 coverage
 *.local
 
-# Environment variables
-.env
-.env.*
-!.env.example
-
 /cypress/videos/
 /cypress/screenshots/
 
@@ -34,3 +29,7 @@ coverage
 
 # Dane osobiste do lokalnego uzupełniania CMS-a (CV, zdjęcie, skrypt) - nigdy do repo
 docs/dane/
+
+# Ansible: realny inventory.ini jest renderowany przez CD z sekretów, sekrety
+# infry (infra/ansible/secrets.yml) są commitowane TYLKO zaszyfrowane (ansible-vault)
+infra/ansible/secrets.yml
