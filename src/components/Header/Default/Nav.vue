@@ -60,7 +60,7 @@ export default {
     const resetToggle = ref(null)
 
     const checkSreenWidth = () => {
-      if (window.innerWidth >= 1600) {
+      if (window.innerWidth >= 1024) {
         mobile.value = true;
         sildeBar.activeClass = false;
       } else {
@@ -149,6 +149,16 @@ header {
       100%{
         transform: translateY(0);
         opacity: 1;
+      }
+    }
+  }
+
+  @media (max-width: 1800px) {
+    .navbar {
+      gap: 1.2rem;
+      margin-right: 1.5rem;
+      a {
+        font-size: 1.1rem;
       }
     }
   }
