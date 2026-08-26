@@ -14,14 +14,19 @@ services:
         condition: on-failure
       labels:
         # Traefik już działa na VPS (osobno od tego stacka) — front tylko
-        # podpina się pod istniejącą sieć traefik-public
+        # podpina się pod istniejącą sieć traefik-public.
+        # Nazwy routera/serwisu/middleware MUSZĄ być unikalne w skali całego
+        # providera Docker (Traefik nie namespace'uje ich per-stack) — inaczej
+        # kolidują z project-job-server-FastAPI, który też ma tu "frontend",
+        # i Traefik odrzuca router w całości ("defined multiple times").
         - "traefik.enable=true"
-        - "traefik.http.routers.frontend.rule=Host(`arturscibor.pl`)"
-        - "traefik.http.routers.frontend.entrypoints=websecure"
-        - "traefik.http.routers.frontend.tls.certresolver=myresolver"
-        - "traefik.http.services.frontend.loadbalancer.server.port=80"
-        - "traefik.http.middlewares.frontend-retry.retry.attempts=2"
-        - "traefik.http.routers.frontend.middlewares=frontend-retry"
+        - "traefik.http.routers.arturscibor-frontend.rule=Host(`arturscibor.pl`)"
+        - "traefik.http.routers.arturscibor-frontend.entrypoints=websecure"
+        - "traefik.http.routers.arturscibor-frontend.tls.certresolver=myresolver"
+        - "traefik.http.routers.arturscibor-frontend.service=arturscibor-frontend"
+        - "traefik.http.services.arturscibor-frontend.loadbalancer.server.port=80"
+        - "traefik.http.middlewares.arturscibor-frontend-retry.retry.attempts=2"
+        - "traefik.http.routers.arturscibor-frontend.middlewares=arturscibor-frontend-retry"
 
 networks:
   traefik-public:
